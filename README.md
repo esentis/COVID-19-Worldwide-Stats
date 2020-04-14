@@ -1,5 +1,5 @@
-# covid19worldwide
+# COVID-19 Worldwide Stats Tracker
 
-Covid-19 Worldwide Cases Tracker
+Aim of the app is to inform people about the current situation.
 
 ## Stay safe, stay home

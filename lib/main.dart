@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       //Using the dark theme
-      theme: ThemeData.dark(),
+      theme: ThemeData(),
       //Redirecting to the cases_screen.dart
       home: CaseScreen(),
     );

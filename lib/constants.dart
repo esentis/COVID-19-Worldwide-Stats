@@ -1,3 +1,4 @@
+
 //LIST OF CONSTANTS USED ACROSS THE APP
 String kOverallCases = '';
 String kOverallDeaths = '';
@@ -9,6 +10,8 @@ String kFetchedOverallDeaths;
 String kFetchedCasesByCountry;
 String kFetchedCasesByCountryGR;
 String kFetchedCasesByCountryCode;
+
+
 
 //THE API URLS THAT OUR APP CALLS
 const String totalsUrl = 'https://covid-19-data.p.rapidapi.com/totals';

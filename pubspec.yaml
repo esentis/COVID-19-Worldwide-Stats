@@ -27,9 +27,9 @@ dependencies:
   flutter_dotenv: ^2.1.0
   slimy_card: ^1.0.2
   country_icons: ^1.1.1
-  flutter_neumorphic: ^1.0.4
   liquid_pull_to_refresh: ^1.1.2
   intl: ^0.16.1
+  font_awesome_flutter: ^8.8.1
 
   # To add assets to your application, add an assets section, like this:
 

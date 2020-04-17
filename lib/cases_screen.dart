@@ -3,7 +3,7 @@ import 'package:slimy_card/slimy_card.dart';
 import 'virus_data.dart';
 import 'constants.dart';
 import 'package:intl/intl.dart';
-import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 
 
@@ -23,11 +23,11 @@ class _CaseScreenState extends State<CaseScreen> {
   @override
   void initState() {
     super.initState();
-    startApp();
+    fetchData();
   }
 
   //This method is mostly for debugging purposes to check the API calls results
-  void startApp() async {
+  void fetchData() async {
     kFetchedOverallCases = await virusData.getOverallConfirmedCases();
     kFetchedOverallDeaths = await virusData.getOverallDeaths();
     setState(() {
@@ -36,18 +36,41 @@ class _CaseScreenState extends State<CaseScreen> {
     });
   }
 
+
+
+  String dropDownItemValue='de';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: LiquidPullToRefresh(
+          backgroundColor: Colors.blueAccent,
             child: ListView(
               children: <Widget>[
                 Text('Overall cases in the world: $kOverallCases'),
-                Text('Overall deaths in the world: $kOverallDeaths')
+                Text('Overall deaths in the world: $kOverallDeaths'),
+                SizedBox(height: 25),
+                Column(
+                  children: <Widget>[
+                    //Drop down menu with country flags to search for cases
+                    DropdownButton(
+                        icon: Icon(FontAwesomeIcons.search),
+                        iconSize: 35,
+                        elevation: 24,
+                        value: dropDownItemValue,
+                        items: kCountryFlags,
+                        onChanged: (value){
+                          setState(() {
+                            dropDownItemValue=value;
+                            print(value);
+                          });
+                        })
+                  ],
+                ),
               ],
             ),
             onRefresh: () async {
-              startApp();
+              fetchData();
             }
         ));
   }

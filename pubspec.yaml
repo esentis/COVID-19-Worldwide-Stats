@@ -30,6 +30,8 @@ dependencies:
   liquid_pull_to_refresh: ^1.1.2
   intl: ^0.16.1
   font_awesome_flutter: ^8.8.1
+  animate_do: ^1.7.1
+  modal_progress_hud: ^0.1.3
 
   # To add assets to your application, add an assets section, like this:
 
@@ -53,6 +55,10 @@ flutter:
   assets:
     - .env
     - assets/
+  fonts:
+    - family: Baloo
+      fonts:
+        - asset: fonts/BalooTammudu2-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -26,7 +26,8 @@ class VirusData {
     NetworkHelper networkByCountryCode =
         new NetworkHelper(url: countryByCodeUrl + countryCode);
     var casesByCountryCode = await networkByCountryCode.getData();
-    return jsonDecode(casesByCountryCode)[0]['confirmed'].toString();
+    return casesByCountryCode;
+//    return jsonDecode(casesByCountryCode)[0]['confirmed'].toString();
   }
 
   //A method that calls for Overall Deaths

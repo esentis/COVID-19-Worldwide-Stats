@@ -30,63 +30,108 @@ class _CaseScreenState extends State<CaseScreen> {
 
   //This method is mostly for debugging purposes to check the API calls results
   void fetchData() async {
-    kFetchedOverallCases = await virusData.getOverallConfirmedCases();
-    kFetchedOverallDeaths = await virusData.getOverallDeaths();
+    kFetchedOverallCases = await virusData.getOverallCases();
+
     setState(() {
-      kOverallCases = kFetchedOverallCases;
-      kOverallDeaths = kFetchedOverallDeaths;
+      kOverallCases =
+          jsonDecode(kFetchedOverallCases)[0]['confirmed'].toString();
+      kOverallDeaths = jsonDecode(kFetchedOverallCases)[0]['deaths'].toString();
+      kOverallRecovered =
+          jsonDecode(kFetchedOverallCases)[0]['recovered'].toString();
+      kOverallCritical =
+          jsonDecode(kFetchedOverallCases)[0]['critical'].toString();
     });
   }
-  String dropDownItemValue='de';
+
+  String dropDownItemValue = 'de';
   bool showSpinner = false;
   String searchedCountryResults;
-  String confirmedCases='-';
-  String recovered='-';
-  String critical='-';
-  String deaths='-';
+  String confirmedCases = '-';
+  String recovered = '-';
+  String critical = '-';
+  String deaths = '-';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFF202040),
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: LiquidPullToRefresh(
-            backgroundColor: Colors.blueAccent,
+              backgroundColor: Colors.blueAccent,
               child: ListView(
                 children: <Widget>[
                   SizedBox(height: 30.0),
-                  Center(child: FadeInLeft(child: Column(
+                  Column(
                     children: <Widget>[
-                      Text('Overall cases in the world: ',style: kOverallTextStyle,textAlign: TextAlign.center,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        textBaseline: TextBaseline.alphabetic,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
                         children: <Widget>[
-                          Flash(child: Icon(FontAwesomeIcons.virus,size: 35,color: Colors.deepOrange,)),
-                          SizedBox(width: 15,),
-                          Text('$kOverallCases',style: kOverallTextStyle),
+                          FadeInLeft(
+                            child: CaseCard(
+                              text: 'Κρούσματα',
+                              fontSize: 23,
+                              icon: FontAwesomeIcons.virus,
+                              results: kOverallCases,
+                              backgroundColor: Color(0xFF363636),
+                              iconColor: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          FadeInLeft(
+                            child: CaseCard(
+                              text: 'Επανήλθαν',
+                              fontSize: 23,
+                              icon: FontAwesomeIcons.thumbsUp,
+                              results: kOverallRecovered,
+                              backgroundColor: Colors.green,
+                              iconColor: Colors.white,
+                            ),
+                          ),
                         ],
-                      )
-                    ],
-                  ))),
-                  Center(child: FadeInLeft(child: Column(
-                    children: <Widget>[
-                      Text('Overall deaths in the world: ',style: kOverallTextStyle),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
                         children: <Widget>[
-                          Flash(child: Icon(FontAwesomeIcons.skull,color: Colors.red,size: 25,)),
-                          SizedBox(width: 15,),
-                          Text('$kOverallDeaths',style: kOverallTextStyle),
+                          FadeInLeft(
+                            child: CaseCard(
+                              text: 'Κρίσιμα',
+                              fontSize: 23,
+                              icon: FontAwesomeIcons.exclamation,
+                              results: kOverallCritical,
+                              backgroundColor: Color(0xFFff5722),
+                              iconColor: Colors.white,
+                            ),
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          FadeInLeft(
+                            child: CaseCard(
+                              text: 'Θάνατοι',
+                              fontSize: 23,
+                              icon: FontAwesomeIcons.skull,
+                              results: kOverallDeaths,
+                              backgroundColor: Color(0xFFc70039),
+                              iconColor: Colors.white,
+                            ),
+                          ),
                         ],
-                      )
+                      ),
                     ],
-                  ))),
+                  ),
                   SizedBox(height: 25),
-                  Center(child: Flash(child: Text('Search country',style: kResultsTextStyle,))),
+                  Center(
+                      child: Flash(
+                          child: Text(
+                    'Search country',
+                    style: kResultsTextStyle,
+                  ))),
                   SizedBox(height: 5),
                   Padding(
                     padding: const EdgeInsets.all(12.0),
@@ -95,28 +140,107 @@ class _CaseScreenState extends State<CaseScreen> {
                         //Drop down menu with country flags to search for cases
                         DropdownButton(
                             icon: Icon(FontAwesomeIcons.search),
-                            underline: Container(
-                            ),
+                            underline: Container(),
                             iconSize: 35,
                             elevation: 24,
                             value: dropDownItemValue,
                             items: kCountryFlags,
                             onChanged: (value) async {
-                              showSpinner=true;
+                              showSpinner = true;
                               setState(() {
-                                dropDownItemValue=value;
+                                dropDownItemValue = value;
                               });
-                              searchedCountryResults = await virusData.getCasesByCountryCode(dropDownItemValue);
-                              confirmedCases = jsonDecode(searchedCountryResults)[0]['confirmed'].toString();
-                              recovered = jsonDecode(searchedCountryResults)[0]['recovered'].toString();
-                              critical = jsonDecode(searchedCountryResults)[0]['critical'].toString();
-                              deaths = jsonDecode(searchedCountryResults)[0]['deaths'].toString();
+                              searchedCountryResults = await virusData
+                                  .getCasesByCountryCode(dropDownItemValue);
+                              confirmedCases =
+                                  jsonDecode(searchedCountryResults)[0]
+                                          ['confirmed']
+                                      .toString();
+                              recovered = jsonDecode(searchedCountryResults)[0]
+                                      ['recovered']
+                                  .toString();
+                              critical = jsonDecode(searchedCountryResults)[0]
+                                      ['critical']
+                                  .toString();
+                              deaths = jsonDecode(searchedCountryResults)[0]
+                                      ['deaths']
+                                  .toString();
                               setState(() {
-                                showSpinner=false;
+                                showSpinner = false;
                               });
                             }),
-                        SizedBox(height: 10,),
-                        ResultsColumn(confirmedCases: confirmedCases, recovered: recovered, critical: critical, deaths: deaths,countryCode: dropDownItemValue,),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Image.asset('icons/flags/png/$dropDownItemValue.png',
+                            package: 'country_icons',scale: 0.5,
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FadeInLeft(
+                                  child: CaseCard(
+                                    text: 'Κρούσματα',
+                                    fontSize: 23,
+                                    icon: FontAwesomeIcons.virus,
+                                    results: confirmedCases,
+                                    backgroundColor: Color(0xFF363636),
+                                    iconColor: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                FadeInLeft(
+                                  child: CaseCard(
+                                    text: 'Επανήλθαν',
+                                    fontSize: 23,
+                                    icon: FontAwesomeIcons.thumbsUp,
+                                    results: recovered,
+                                    backgroundColor: Colors.green,
+                                    iconColor: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                FadeInLeft(
+                                  child: CaseCard(
+                                    text: 'Κρίσιμα',
+                                    fontSize: 23,
+                                    icon: FontAwesomeIcons.exclamation,
+                                    results: critical,
+                                    backgroundColor: Color(0xFFff5722),
+                                    iconColor: Colors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                FadeInLeft(
+                                  child: CaseCard(
+                                    text: 'Θάνατοι',
+                                    fontSize: 23,
+                                    icon: FontAwesomeIcons.skull,
+                                    results: deaths,
+                                    backgroundColor: Color(0xFFc70039),
+                                    iconColor: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
@@ -124,9 +248,7 @@ class _CaseScreenState extends State<CaseScreen> {
               ),
               onRefresh: () async {
                 fetchData();
-              }
-          ),
+              }),
         ));
   }
 }
-

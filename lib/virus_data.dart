@@ -8,9 +8,10 @@ class VirusData {
   NetworkHelper networkOverallCases = new NetworkHelper(url: totalsUrl);
 
   //A methods that calls API for Cases by Country name
-  Future<String> getOverallConfirmedCases() async {
+  Future<String> getOverallCases() async {
     var overallCasesData = await networkOverallCases.getData();
-    return jsonDecode(overallCasesData)[0]['confirmed'].toString();
+//    return jsonDecode(overallCasesData)[0]['confirmed'].toString();
+    return overallCasesData;
   }
 
   //A methods that calls API for Cases by Country name
@@ -28,11 +29,5 @@ class VirusData {
     var casesByCountryCode = await networkByCountryCode.getData();
     return casesByCountryCode;
 //    return jsonDecode(casesByCountryCode)[0]['confirmed'].toString();
-  }
-
-  //A method that calls for Overall Deaths
-  Future<String> getOverallDeaths() async {
-    var overallDeathsData = await networkOverallCases.getData();
-    return jsonDecode(overallDeathsData)[0]['deaths'].toString();
   }
 }

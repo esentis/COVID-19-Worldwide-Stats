@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'virus_data.dart';
 import 'constants.dart';
-import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:animate_do/animate_do.dart';
@@ -17,8 +16,6 @@ class CaseScreen extends StatefulWidget {
 }
 
 class _CaseScreenState extends State<CaseScreen> {
-  NumberFormat heart = new NumberFormat("#,###", "en_US");
-
   //A new instance of VirusData to access search methods
   VirusData virusData = new VirusData();
 
@@ -68,15 +65,16 @@ class _CaseScreenState extends State<CaseScreen> {
                     SizedBox(height: 30.0),
                     Column(
                       children: <Widget>[
-                        Center(child: Text(
+                        Center(
+                            child: Text(
                           'Worldwide',
                           textAlign: TextAlign.center,
-                          style : TextStyle(
+                          style: TextStyle(
                               fontFamily: 'Baloo',
                               color: Colors.white,
                               fontSize: 40,
-                              fontWeight: FontWeight.w900
-                          ),)),
+                              fontWeight: FontWeight.w900),
+                        )),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -148,15 +146,16 @@ class _CaseScreenState extends State<CaseScreen> {
                     ),
                     SizedBox(height: 10),
                     Flash(
-                      child: Center(child: Text(
+                      child: Center(
+                          child: Text(
                         'Search country',
                         textAlign: TextAlign.center,
-                        style : TextStyle(
+                        style: TextStyle(
                             fontFamily: 'Baloo',
                             color: Colors.white,
                             fontSize: 20,
-                            fontWeight: FontWeight.w900
-                        ),)),
+                            fontWeight: FontWeight.w900),
+                      )),
                     ),
                     Container(
                       color: Colors.white,
@@ -170,7 +169,7 @@ class _CaseScreenState extends State<CaseScreen> {
                         // to initial code number country
                         initialSelection: '+62',
                         // to get feedback data from picker
-                        onChanged: (CountryCode code) async{
+                        onChanged: (CountryCode code) async {
                           // name of country
                           print(code.name);
                           // code of country
@@ -179,41 +178,41 @@ class _CaseScreenState extends State<CaseScreen> {
                           print(code.dialCode);
                           // path flag of country
                           print(code.flagUri);
-                            showSpinner = true;
-                            chosenCountry = code.code.toLowerCase();
-                            countryName=code.name;
-                            searchedCountryResults = await virusData
-                                .getCasesByCountryCode(chosenCountry);
-                            confirmedCases =
-                                jsonDecode(searchedCountryResults)[0]
-                                ['confirmed']
-                                    .toString();
-                            recovered = jsonDecode(searchedCountryResults)[0]
-                            ['recovered']
-                                .toString();
-                            critical = jsonDecode(searchedCountryResults)[0]
-                            ['critical']
-                                .toString();
-                            deaths = jsonDecode(searchedCountryResults)[0]
-                            ['deaths']
-                                .toString();
-                            setState(() {
-                              showSpinner = false;
-                            });
+                          showSpinner = true;
+                          chosenCountry = code.code.toLowerCase();
+                          countryName = code.name;
+                          searchedCountryResults = await virusData
+                              .getCasesByCountryCode(chosenCountry);
+                          confirmedCases = jsonDecode(searchedCountryResults)[0]
+                                  ['confirmed']
+                              .toString();
+                          recovered = jsonDecode(searchedCountryResults)[0]
+                                  ['recovered']
+                              .toString();
+                          critical = jsonDecode(searchedCountryResults)[0]
+                                  ['critical']
+                              .toString();
+                          deaths = jsonDecode(searchedCountryResults)[0]
+                                  ['deaths']
+                              .toString();
+                          setState(() {
+                            showSpinner = false;
+                          });
                         },
                       ),
                     ),
 //                    Image.asset('flags/aq.png',package: 'country_list_pick',scale: 1.5,),
                     SizedBox(height: 5),
-                    Center(child: Text(
+                    Center(
+                        child: Text(
                       countryName,
                       textAlign: TextAlign.center,
-                      style : TextStyle(
-                        fontFamily: 'Baloo',
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w900
-                      ),)),
+                      style: TextStyle(
+                          fontFamily: 'Baloo',
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.w900),
+                    )),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(

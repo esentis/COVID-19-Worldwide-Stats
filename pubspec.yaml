@@ -25,9 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   http: ^0.12.0+4
   flutter_dotenv: ^2.1.0
-  slimy_card: ^1.0.2
   liquid_pull_to_refresh: ^1.1.2
-  intl: ^0.16.1
   font_awesome_flutter: ^8.8.1
   animate_do: ^1.7.1
   modal_progress_hud: ^0.1.3

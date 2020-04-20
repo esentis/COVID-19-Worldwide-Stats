@@ -51,6 +51,38 @@ class _CaseScreenState extends State<CaseScreen> {
   String critical = '-';
   String deaths = '-';
 
+  //Method that updates the searched country UI
+  Future<void> updateUI(CountryCode code) async{
+    // name of country
+    print(code.name);
+    // code of country
+    print(code.code);
+    // code phone of country
+    print(code.dialCode);
+    // path flag of country
+    print(code.flagUri);
+    showSpinner = true;
+    chosenCountry = code.code.toLowerCase();
+    countryName = code.name;
+    searchedCountryResults = await virusData
+        .getCasesByCountryCode(chosenCountry);
+    confirmedCases = jsonDecode(searchedCountryResults)[0]
+    ['confirmed']
+        .toString();
+    recovered = jsonDecode(searchedCountryResults)[0]
+    ['recovered']
+        .toString();
+    critical = jsonDecode(searchedCountryResults)[0]
+    ['critical']
+        .toString();
+    deaths = jsonDecode(searchedCountryResults)[0]
+    ['deaths']
+        .toString();
+    setState(() {
+      showSpinner = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,34 +202,7 @@ class _CaseScreenState extends State<CaseScreen> {
                         initialSelection: '+62',
                         // to get feedback data from picker
                         onChanged: (CountryCode code) async {
-                          // name of country
-                          print(code.name);
-                          // code of country
-                          print(code.code);
-                          // code phone of country
-                          print(code.dialCode);
-                          // path flag of country
-                          print(code.flagUri);
-                          showSpinner = true;
-                          chosenCountry = code.code.toLowerCase();
-                          countryName = code.name;
-                          searchedCountryResults = await virusData
-                              .getCasesByCountryCode(chosenCountry);
-                          confirmedCases = jsonDecode(searchedCountryResults)[0]
-                                  ['confirmed']
-                              .toString();
-                          recovered = jsonDecode(searchedCountryResults)[0]
-                                  ['recovered']
-                              .toString();
-                          critical = jsonDecode(searchedCountryResults)[0]
-                                  ['critical']
-                              .toString();
-                          deaths = jsonDecode(searchedCountryResults)[0]
-                                  ['deaths']
-                              .toString();
-                          setState(() {
-                            showSpinner = false;
-                          });
+                          updateUI(code);
                         },
                       ),
                     ),

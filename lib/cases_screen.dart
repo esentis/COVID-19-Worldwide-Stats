@@ -23,13 +23,15 @@ class _CaseScreenState extends State<CaseScreen> {
   @override
   void initState() {
     super.initState();
+    //Fetch Overall Data every time page loads
     fetchData();
   }
 
-  //This method is mostly for debugging purposes to check the API calls results
+  //The method that gets initialized on page load, gets overall cases
   void fetchData() async {
     kFetchedOverallCases = await virusData.getOverallCases();
 
+    //Set state of overall cases card
     setState(() {
       kOverallCases =
           jsonDecode(kFetchedOverallCases)[0]['confirmed'].toString();
@@ -41,6 +43,7 @@ class _CaseScreenState extends State<CaseScreen> {
     });
   }
 
+  //Variables needed
   String dropDownItemValue = 'de';
   String chosenCountry;
   String countryName = '';
@@ -83,6 +86,7 @@ class _CaseScreenState extends State<CaseScreen> {
     });
   }
 
+  //Main build method of cases screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,6 +94,7 @@ class _CaseScreenState extends State<CaseScreen> {
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: SafeArea(
+            //Pull the page to refresh
             child: LiquidPullToRefresh(
                 backgroundColor: Colors.blueAccent,
                 child: ListView(
@@ -98,6 +103,7 @@ class _CaseScreenState extends State<CaseScreen> {
                     Column(
                       children: <Widget>[
                         Center(
+                          //WORLDWIDE TITLE HEADER
                             child: Text(
                           'Worldwide',
                           textAlign: TextAlign.center,
@@ -112,6 +118,7 @@ class _CaseScreenState extends State<CaseScreen> {
                           children: <Widget>[
                             Expanded(
                               child: FadeInLeft(
+                                //Searched worldwide overall cases card
                                 child: CaseCard(
                                   text: 'Κρούσματα',
                                   fontSize: 23,
@@ -127,6 +134,7 @@ class _CaseScreenState extends State<CaseScreen> {
                             ),
                             Expanded(
                               child: FadeInLeft(
+                                //Searched worldwide recovered cases card
                                 child: CaseCard(
                                   text: 'Επανήλθαν',
                                   fontSize: 23,
@@ -147,6 +155,7 @@ class _CaseScreenState extends State<CaseScreen> {
                           children: <Widget>[
                             Expanded(
                               child: FadeInLeft(
+                                //Searched worldwide critical cases card
                                 child: CaseCard(
                                   text: 'Κρίσιμα',
                                   fontSize: 23,
@@ -162,6 +171,7 @@ class _CaseScreenState extends State<CaseScreen> {
                             ),
                             Expanded(
                               child: FadeInLeft(
+                                //Searched worldwide deaths card
                                 child: CaseCard(
                                   text: 'Θάνατοι',
                                   fontSize: 23,
@@ -177,6 +187,7 @@ class _CaseScreenState extends State<CaseScreen> {
                       ],
                     ),
                     SizedBox(height: 10),
+                    //Simple flash animation indicating the search capability
                     Flash(
                       child: Center(
                           child: Text(
@@ -189,6 +200,7 @@ class _CaseScreenState extends State<CaseScreen> {
                             fontWeight: FontWeight.w900),
                       )),
                     ),
+                    //Country picker container
                     Container(
                       color: Colors.white,
                       child: CountryListPick(
@@ -208,6 +220,7 @@ class _CaseScreenState extends State<CaseScreen> {
                     ),
 //                    Image.asset('flags/aq.png',package: 'country_list_pick',scale: 1.5,),
                     SizedBox(height: 5),
+                    //COUNTRY NAME TITLE
                     Center(
                         child: Text(
                       countryName,
@@ -218,6 +231,7 @@ class _CaseScreenState extends State<CaseScreen> {
                           fontSize: 40,
                           fontWeight: FontWeight.w900),
                     )),
+                    //HERE STARTS THE RESULTS CARDS
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
@@ -229,6 +243,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                 children: <Widget>[
                                   Expanded(
                                     child: FadeInLeft(
+                                      //Searched overall cases card
                                       child: CaseCard(
                                         text: 'Κρούσματα',
                                         fontSize: 23,
@@ -244,6 +259,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                   ),
                                   Expanded(
                                     child: FadeInLeft(
+                                      //Searched recovered cases card
                                       child: CaseCard(
                                         text: 'Επανήλθαν',
                                         fontSize: 23,
@@ -264,6 +280,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                 children: <Widget>[
                                   Expanded(
                                     child: FadeInLeft(
+                                      //Searched critical cases card
                                       child: CaseCard(
                                         text: 'Κρίσιμα',
                                         fontSize: 23,
@@ -280,6 +297,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                   Expanded(
                                     child: FadeInLeft(
                                       child: CaseCard(
+                                        //Searched death cases card
                                         text: 'Θάνατοι',
                                         fontSize: 23,
                                         icon: FontAwesomeIcons.skull,

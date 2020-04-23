@@ -14,9 +14,13 @@ String kFetchedCasesByCountry;
 String kFetchedCasesByCountryGR;
 String kFetchedCasesByCountryCode;
 
-const kResultsNumberStyle = TextStyle(fontSize: 25, fontFamily: 'Baloo',color: Colors.white);
-const kResultsTextStyle = TextStyle(fontSize: 24, fontFamily: 'Baloo');
-const kOverallTextStyle = TextStyle(fontSize: 30, fontFamily: 'Cardo',color: Colors.white);
+enum kSelectedLanguage { Greek, English }
+
+const kResultsNumberStyle =
+    TextStyle(fontSize: 25, fontFamily: 'Cardo', color: Colors.white);
+const kResultsTextStyle = TextStyle(fontSize: 24, fontFamily: 'Cardo');
+const kOverallTextStyle =
+    TextStyle(fontSize: 30, fontFamily: 'Cardo', color: Colors.white);
 //THE API URLS THAT OUR APP CALLS
 const String totalsUrl = 'https://covid-19-data.p.rapidapi.com/totals';
 const String countryUrl =

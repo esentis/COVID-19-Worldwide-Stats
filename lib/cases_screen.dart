@@ -53,6 +53,7 @@ class _CaseScreenState extends State<CaseScreen> {
   String recovered = '-';
   String critical = '-';
   String deaths = '-';
+  kSelectedLanguage selectedLanguage=kSelectedLanguage.Greek;
 
   //Method that updates the searched country UI
   Future<void> updateUI(CountryCode code) async{
@@ -99,16 +100,59 @@ class _CaseScreenState extends State<CaseScreen> {
                 backgroundColor: Colors.blueAccent,
                 child: ListView(
                   children: <Widget>[
-                    SizedBox(height: 30.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(children: <Widget>[
+                          GestureDetector(
+                              onTap: (){
+                                print("English language selected");
+                                setState(() {
+                                  selectedLanguage = kSelectedLanguage.English;
+                                });
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                    color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
+                                    border: Border.all(
+                                      width: 2,
+                                      color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
+                                    )
+                                  ),
+                                  child: Image.asset('flags/us.png',package: 'country_list_pick',scale: 4,))
+                          ),
+                          SizedBox(width: 10,),
+                          GestureDetector(
+                              onTap: (){
+                                print("Greek language selected");
+                                setState(() {
+                                  selectedLanguage = kSelectedLanguage.Greek;
+                                });
+                              },
+                              child: Container(
+                                  decoration: BoxDecoration(
+                                      color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
+                                      border: Border.all(
+                                        width: 2,
+                                        color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
+                                      )
+                                  ),
+                                  child: Image.asset('flags/gr.png',package: 'country_list_pick',scale: 5))
+                          ),
+                        ],),
+
+                      ],
+                    ),
                     Column(
                       children: <Widget>[
+
                         Center(
                           //WORLDWIDE TITLE HEADER
                             child: Text(
-                          'Worldwide',
+                          selectedLanguage==kSelectedLanguage.Greek? 'Παγκόσμια' : 'Worldwide',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: 'Baloo',
+                              fontFamily: 'Cardo',
                               color: Colors.white,
                               fontSize: 40,
                               fontWeight: FontWeight.w900),
@@ -120,7 +164,7 @@ class _CaseScreenState extends State<CaseScreen> {
                               child: FadeInLeft(
                                 //Searched worldwide overall cases card
                                 child: CaseCard(
-                                  text: 'Κρούσματα',
+                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
                                   fontSize: 23,
                                   icon: FontAwesomeIcons.virus,
                                   results: kOverallCases,
@@ -136,7 +180,7 @@ class _CaseScreenState extends State<CaseScreen> {
                               child: FadeInLeft(
                                 //Searched worldwide recovered cases card
                                 child: CaseCard(
-                                  text: 'Επανήλθαν',
+                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
                                   fontSize: 23,
                                   icon: FontAwesomeIcons.thumbsUp,
                                   results: kOverallRecovered,
@@ -157,7 +201,7 @@ class _CaseScreenState extends State<CaseScreen> {
                               child: FadeInLeft(
                                 //Searched worldwide critical cases card
                                 child: CaseCard(
-                                  text: 'Κρίσιμα',
+                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
                                   fontSize: 23,
                                   icon: FontAwesomeIcons.exclamation,
                                   results: kOverallCritical,
@@ -173,7 +217,7 @@ class _CaseScreenState extends State<CaseScreen> {
                               child: FadeInLeft(
                                 //Searched worldwide deaths card
                                 child: CaseCard(
-                                  text: 'Θάνατοι',
+                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Θανατοι' : 'Deaths',
                                   fontSize: 23,
                                   icon: FontAwesomeIcons.skull,
                                   results: kOverallDeaths,
@@ -191,10 +235,10 @@ class _CaseScreenState extends State<CaseScreen> {
                     Flash(
                       child: Center(
                           child: Text(
-                        'Search country',
+                            selectedLanguage==kSelectedLanguage.Greek? 'Αναζήτηση χώρας' : 'Search country',
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontFamily: 'Baloo',
+                            fontFamily: 'Cardo',
                             color: Colors.white,
                             fontSize: 20,
                             fontWeight: FontWeight.w900),
@@ -226,7 +270,7 @@ class _CaseScreenState extends State<CaseScreen> {
                       countryName,
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                          fontFamily: 'Baloo',
+                          fontFamily: 'Cardo',
                           color: Colors.white,
                           fontSize: 40,
                           fontWeight: FontWeight.w900),
@@ -245,7 +289,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                     child: FadeInLeft(
                                       //Searched overall cases card
                                       child: CaseCard(
-                                        text: 'Κρούσματα',
+                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
                                         fontSize: 23,
                                         icon: FontAwesomeIcons.virus,
                                         results: confirmedCases,
@@ -261,7 +305,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                     child: FadeInLeft(
                                       //Searched recovered cases card
                                       child: CaseCard(
-                                        text: 'Επανήλθαν',
+                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
                                         fontSize: 23,
                                         icon: FontAwesomeIcons.thumbsUp,
                                         results: recovered,
@@ -282,7 +326,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                     child: FadeInLeft(
                                       //Searched critical cases card
                                       child: CaseCard(
-                                        text: 'Κρίσιμα',
+                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
                                         fontSize: 23,
                                         icon: FontAwesomeIcons.exclamation,
                                         results: critical,
@@ -298,7 +342,7 @@ class _CaseScreenState extends State<CaseScreen> {
                                     child: FadeInLeft(
                                       child: CaseCard(
                                         //Searched death cases card
-                                        text: 'Θάνατοι',
+                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Θάνατοι' : 'Deaths',
                                         fontSize: 23,
                                         icon: FontAwesomeIcons.skull,
                                         results: deaths,

@@ -5,6 +5,7 @@ Aim of the app is to inform people about the current situation.
 
 ![COVID-19 Stats Demo](https://media.giphy.com/media/Y07V9bliEzmNmsPOSc/giphy.gif)
 ![COVID-19 Stats Demo](https://media.giphy.com/media/huPiXUAIkQcJWcBxLE/giphy.gif)
+![COVID-19 Stats Demo](/ss1.gif)
 
 ## Technical Details
 The app is made in Flutter/Dart.

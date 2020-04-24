@@ -9,6 +9,7 @@ import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:convert';
 import 'components.dart';
 import 'package:country_list_pick/country_list_pick.dart';
+import 'package:hover_effect/hover_effect.dart';
 
 class CaseScreen extends StatefulWidget {
   @override
@@ -97,140 +98,220 @@ class _CaseScreenState extends State<CaseScreen> {
           child: SafeArea(
             //Pull the page to refresh
             child: LiquidPullToRefresh(
-                backgroundColor: Colors.blueAccent,
+              height: 150,
+                backgroundColor: Color(0xFF202040),
+                color: Colors.white,
                 child: ListView(
                   children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Row(children: <Widget>[
-                          GestureDetector(
-                              onTap: (){
-                                print("English language selected");
-                                setState(() {
-                                  selectedLanguage = kSelectedLanguage.English;
-                                });
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                    color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
-                                    border: Border.all(
-                                      width: 2,
-                                      color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
-                                    )
-                                  ),
-                                  child: Image.asset('flags/us.png',package: 'country_list_pick',scale: 4,))
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 20,
                           ),
-                          SizedBox(width: 10,),
-                          GestureDetector(
-                              onTap: (){
-                                print("Greek language selected");
-                                setState(() {
-                                  selectedLanguage = kSelectedLanguage.Greek;
-                                });
-                              },
-                              child: Container(
-                                  decoration: BoxDecoration(
-                                      color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
+                          Row(children: <Widget>[
+                            GestureDetector(
+                                onTap: (){
+                                  print("English language selected");
+                                  setState(() {
+                                    selectedLanguage = kSelectedLanguage.English;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                      color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
                                       border: Border.all(
                                         width: 2,
-                                        color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
+                                        color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
                                       )
-                                  ),
-                                  child: Image.asset('flags/gr.png',package: 'country_list_pick',scale: 5))
+                                    ),
+                                    child: Image.asset('flags/us.png',package: 'country_list_pick',scale: 4,))
+                            ),
+                            SizedBox(width: 10,),
+                            GestureDetector(
+                                onTap: (){
+                                  print("Greek language selected");
+                                  setState(() {
+                                    selectedLanguage = kSelectedLanguage.Greek;
+                                  });
+                                },
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
+                                        border: Border.all(
+                                          width: 2,
+                                          color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
+                                        )
+                                    ),
+                                    child: Image.asset('flags/gr.png',package: 'country_list_pick',scale: 5))
+                            ),
+                          ],),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(5),
+                      child: Column(
+                        children: <Widget>[
+                          Center(
+                            //WORLDWIDE TITLE HEADER
+                              child: Text(
+                            selectedLanguage==kSelectedLanguage.Greek? 'Παγκόσμια' : 'Worldwide',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontFamily: 'Cardo',
+                                color: Colors.white,
+                                fontSize: 40,
+                                fontWeight: FontWeight.w900),
+                          )),
+                          SizedBox(
+                            height: 20,
                           ),
-                        ],),
-
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              //CONTAINER WITH OVERALL CASES
+                              Expanded(
+                                child: Container(
+                                  width: 150,
+                                  height: 120,
+                                  child: HoverCard(
+                                    builder: (context, hovering) {
+                                      return Container(
+                                        color: Color(0xFFE9E9E9),
+                                        child: Center(
+                                          child: FadeInLeft(
+                                            //Searched worldwide overall cases card
+                                            child: CaseCard(
+                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
+                                              fontSize: 23,
+                                              icon: FontAwesomeIcons.virus,
+                                              results: kOverallCases,
+                                              backgroundColor: Color(0xFF363636),
+                                              iconColor: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    depth: 10,
+                                    depthColor: Colors.grey[500],
+                                    onTap: () => print('Hello, World!'),
+                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 15,),
+                              //CONTAINER WITH SEARCHED RECOVERED
+                              Expanded(
+                                child: Container(
+                                  width: 150,
+                                  height: 120,
+                                  child: HoverCard(
+                                    builder: (context, hovering) {
+                                      return Container(
+                                        color: Color(0xFFE9E9E9),
+                                        child: Center(
+                                          child: FadeInLeft(
+                                            //Searched worldwide recovered cases card
+                                            child: CaseCard(
+                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
+                                              fontSize: 23,
+                                              icon: FontAwesomeIcons.thumbsUp,
+                                              results: kOverallRecovered,
+                                              backgroundColor: Colors.green,
+                                              iconColor: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    depth: 10,
+                                    depthColor: Colors.grey[500],
+                                    onTap: () => print('Hello, World!'),
+                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              //CONTAINER WITH SEARCHED CRITICAL
+                              Expanded(
+                                child: Container(
+                                  width: 150,
+                                  height: 120,
+                                  child: HoverCard(
+                                    builder: (context, hovering) {
+                                      return Container(
+                                        color: Color(0xFFE9E9E9),
+                                        child: Center(
+                                          child: FadeInLeft(
+                                            //Searched worldwide critical cases card
+                                            child: CaseCard(
+                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
+                                              fontSize: 23,
+                                              icon: FontAwesomeIcons.exclamation,
+                                              results: kOverallCritical,
+                                              backgroundColor: Color(0xFFff5722),
+                                              iconColor: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    depth: 10,
+                                    depthColor: Colors.grey[500],
+                                    onTap: () => print('Hello, World!'),
+                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 15,),
+                              //CONTAINER WITH SEARCHED DEATHS
+                              Expanded(
+                                child: Container(
+                                  width: 150,
+                                  height: 120,
+                                  child: HoverCard(
+                                    builder: (context, hovering) {
+                                      return Container(
+                                        color: Color(0xFFE9E9E9),
+                                        child: Center(
+                                          child: FadeInLeft(
+                                            //Searched worldwide deaths card
+                                            child: CaseCard(
+                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Θανατοι' : 'Deaths',
+                                              fontSize: 23,
+                                              icon: FontAwesomeIcons.skull,
+                                              results: kOverallDeaths,
+                                              backgroundColor: Color(0xFFc70039),
+                                              iconColor: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    depth: 10,
+                                    depthColor: Colors.grey[500],
+                                    onTap: () => print('Hello, World!'),
+                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
-                    Column(
-                      children: <Widget>[
-
-                        Center(
-                          //WORLDWIDE TITLE HEADER
-                            child: Text(
-                          selectedLanguage==kSelectedLanguage.Greek? 'Παγκόσμια' : 'Worldwide',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontFamily: 'Cardo',
-                              color: Colors.white,
-                              fontSize: 40,
-                              fontWeight: FontWeight.w900),
-                        )),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: FadeInLeft(
-                                //Searched worldwide overall cases card
-                                child: CaseCard(
-                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
-                                  fontSize: 23,
-                                  icon: FontAwesomeIcons.virus,
-                                  results: kOverallCases,
-                                  backgroundColor: Color(0xFF363636),
-                                  iconColor: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: FadeInLeft(
-                                //Searched worldwide recovered cases card
-                                child: CaseCard(
-                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
-                                  fontSize: 23,
-                                  icon: FontAwesomeIcons.thumbsUp,
-                                  results: kOverallRecovered,
-                                  backgroundColor: Colors.green,
-                                  iconColor: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: FadeInLeft(
-                                //Searched worldwide critical cases card
-                                child: CaseCard(
-                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
-                                  fontSize: 23,
-                                  icon: FontAwesomeIcons.exclamation,
-                                  results: kOverallCritical,
-                                  backgroundColor: Color(0xFFff5722),
-                                  iconColor: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Expanded(
-                              child: FadeInLeft(
-                                //Searched worldwide deaths card
-                                child: CaseCard(
-                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Θανατοι' : 'Deaths',
-                                  fontSize: 23,
-                                  icon: FontAwesomeIcons.skull,
-                                  results: kOverallDeaths,
-                                  backgroundColor: Color(0xFFc70039),
-                                  iconColor: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10),
+                    SizedBox(height: 40),
                     //Simple flash animation indicating the search capability
                     Flash(
                       child: Center(
@@ -244,6 +325,7 @@ class _CaseScreenState extends State<CaseScreen> {
                             fontWeight: FontWeight.w900),
                       )),
                     ),
+                    SizedBox(height: 5,),
                     //Country picker container
                     Container(
                       color: Colors.white,
@@ -263,7 +345,6 @@ class _CaseScreenState extends State<CaseScreen> {
                       ),
                     ),
 //                    Image.asset('flags/aq.png',package: 'country_list_pick',scale: 1.5,),
-                    SizedBox(height: 5),
                     //COUNTRY NAME TITLE
                     Center(
                         child: Text(
@@ -277,77 +358,145 @@ class _CaseScreenState extends State<CaseScreen> {
                     )),
                     //HERE STARTS THE RESULTS CARDS
                     Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: const EdgeInsets.all(10),
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Column(
                             children: <Widget>[
                               Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
+                                  //CONTAINER WITH SEARCHED CASES
                                   Expanded(
-                                    child: FadeInLeft(
-                                      //Searched overall cases card
-                                      child: CaseCard(
-                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
-                                        fontSize: 23,
-                                        icon: FontAwesomeIcons.virus,
-                                        results: confirmedCases,
-                                        backgroundColor: Color(0xFF363636),
-                                        iconColor: Colors.white,
+                                    child: Container(
+                                      width: 150,
+                                      height: 120,
+                                      child: HoverCard(
+                                        builder: (context, hovering) {
+                                          return Container(
+                                            color: Color(0xFFE9E9E9),
+                                            child: Center(
+                                              child: FadeInLeft(
+                                                //Searched overall cases card
+                                                child: CaseCard(
+                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
+                                                  fontSize: 23,
+                                                  icon: FontAwesomeIcons.virus,
+                                                  results: confirmedCases,
+                                                  backgroundColor: Color(0xFF363636),
+                                                  iconColor: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        depth: 10,
+                                        depthColor: Colors.grey[500],
+                                        onTap: () => print('Hello, World!'),
+                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
+                                  SizedBox(width: 15,),
+                                  //CONTAINER WITH SEARCHED RECOVERED
                                   Expanded(
-                                    child: FadeInLeft(
-                                      //Searched recovered cases card
-                                      child: CaseCard(
-                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
-                                        fontSize: 23,
-                                        icon: FontAwesomeIcons.thumbsUp,
-                                        results: recovered,
-                                        backgroundColor: Colors.green,
-                                        iconColor: Colors.white,
+                                    child: Container(
+                                      width: 150,
+                                      height: 120,
+                                      child: HoverCard(
+                                        builder: (context, hovering) {
+                                          return Container(
+                                            color: Color(0xFFE9E9E9),
+                                            child: Center(
+                                              child: FadeInLeft(
+                                                //Searched recovered cases card
+                                                child: CaseCard(
+                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
+                                                  fontSize: 23,
+                                                  icon: FontAwesomeIcons.thumbsUp,
+                                                  results: recovered,
+                                                  backgroundColor: Colors.green,
+                                                  iconColor: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        depth: 10,
+                                        depthColor: Colors.grey[500],
+                                        onTap: () => print('Hello, World!'),
+                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
                               SizedBox(
-                                height: 10,
+                                height: 20,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
+                                  //CONTAINER WITH SEARCHED CRITICAL
                                   Expanded(
-                                    child: FadeInLeft(
-                                      //Searched critical cases card
-                                      child: CaseCard(
-                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
-                                        fontSize: 23,
-                                        icon: FontAwesomeIcons.exclamation,
-                                        results: critical,
-                                        backgroundColor: Color(0xFFff5722),
-                                        iconColor: Colors.white,
+                                    child: Container(
+                                      width: 150,
+                                      height: 120,
+                                      child: HoverCard(
+                                        builder: (context, hovering) {
+                                          return Container(
+                                            color: Color(0xFFE9E9E9),
+                                            child: Center(
+                                              child: FadeInLeft(
+                                                //Searched critical cases card
+                                                child: CaseCard(
+                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
+                                                  fontSize: 23,
+                                                  icon: FontAwesomeIcons.exclamation,
+                                                  results: critical,
+                                                  backgroundColor: Color(0xFFff5722),
+                                                  iconColor: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        depth: 10,
+                                        depthColor: Colors.grey[500],
+                                        onTap: () => print('Hello, World!'),
+                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
+                                  SizedBox(width: 15,),
+                                  //CONTAINER WITH SEARCHED DEATHS
                                   Expanded(
-                                    child: FadeInLeft(
-                                      child: CaseCard(
-                                        //Searched death cases card
-                                        text: selectedLanguage==kSelectedLanguage.Greek? 'Θάνατοι' : 'Deaths',
-                                        fontSize: 23,
-                                        icon: FontAwesomeIcons.skull,
-                                        results: deaths,
-                                        backgroundColor: Color(0xFFc70039),
-                                        iconColor: Colors.white,
+                                    child: Container(
+                                      width: 150,
+                                      height: 120,
+                                      child: HoverCard(
+                                        builder: (context, hovering) {
+                                          return Container(
+                                            color: Color(0xFFE9E9E9),
+                                            child: Center(
+                                              child: FadeInLeft(
+                                                child: CaseCard(
+                                                  //Searched death cases card
+                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Θάνατοι' : 'Deaths',
+                                                  fontSize: 23,
+                                                  icon: FontAwesomeIcons.skull,
+                                                  results: deaths,
+                                                  backgroundColor: Color(0xFFc70039),
+                                                  iconColor: Colors.white,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        depth: 10,
+                                        depthColor: Colors.grey[500],
+                                        onTap: () => print('Hello, World!'),
+                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
@@ -356,6 +505,7 @@ class _CaseScreenState extends State<CaseScreen> {
                             ],
                           )
                         ],
+
                       ),
                     ),
                   ],

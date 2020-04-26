@@ -44,7 +44,7 @@ class _CaseScreenState extends State<CaseScreen> {
     });
   }
 
-  //Variables needed
+  //Variables needed-------------------------------------------------//
   String dropDownItemValue = 'de';
   String chosenCountry;
   String countryName = '';
@@ -54,10 +54,11 @@ class _CaseScreenState extends State<CaseScreen> {
   String recovered = '-';
   String critical = '-';
   String deaths = '-';
-  kSelectedLanguage selectedLanguage=kSelectedLanguage.Greek;
+  kSelectedLanguage selectedLanguage = kSelectedLanguage.Greek;
+  //----------------------------------------------------------------//
 
   //Method that updates the searched country UI
-  Future<void> updateUI(CountryCode code) async{
+  Future<void> updateUI(CountryCode code) async {
     // name of country
     print(code.name);
     // code of country
@@ -69,20 +70,13 @@ class _CaseScreenState extends State<CaseScreen> {
     showSpinner = true;
     chosenCountry = code.code.toLowerCase();
     countryName = code.name;
-    searchedCountryResults = await virusData
-        .getCasesByCountryCode(chosenCountry);
-    confirmedCases = jsonDecode(searchedCountryResults)[0]
-    ['confirmed']
-        .toString();
-    recovered = jsonDecode(searchedCountryResults)[0]
-    ['recovered']
-        .toString();
-    critical = jsonDecode(searchedCountryResults)[0]
-    ['critical']
-        .toString();
-    deaths = jsonDecode(searchedCountryResults)[0]
-    ['deaths']
-        .toString();
+    searchedCountryResults =
+        await virusData.getCasesByCountryCode(chosenCountry);
+    confirmedCases =
+        jsonDecode(searchedCountryResults)[0]['confirmed'].toString();
+    recovered = jsonDecode(searchedCountryResults)[0]['recovered'].toString();
+    critical = jsonDecode(searchedCountryResults)[0]['critical'].toString();
+    deaths = jsonDecode(searchedCountryResults)[0]['deaths'].toString();
     setState(() {
       showSpinner = false;
     });
@@ -98,7 +92,7 @@ class _CaseScreenState extends State<CaseScreen> {
           child: SafeArea(
             //Pull the page to refresh
             child: LiquidPullToRefresh(
-              height: 150,
+                height: 150,
                 backgroundColor: Color(0xFF202040),
                 color: Colors.white,
                 child: ListView(
@@ -111,43 +105,57 @@ class _CaseScreenState extends State<CaseScreen> {
                           SizedBox(
                             height: 20,
                           ),
-                          Row(children: <Widget>[
-                            GestureDetector(
-                                onTap: (){
-                                  print("English language selected");
+                          Row(
+                            children: <Widget>[
+                              LanguagePicker(
+                                languageFlag: Image.asset(
+                                  'flags/us.png',
+                                  package: 'country_list_pick',
+                                  scale: 4,
+                                ),
+                                onTapped: () {
                                   setState(() {
-                                    selectedLanguage = kSelectedLanguage.English;
+                                    selectedLanguage =
+                                        kSelectedLanguage.English;
                                   });
                                 },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                      color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
-                                      border: Border.all(
-                                        width: 2,
-                                        color: selectedLanguage == kSelectedLanguage.English ? Colors.red : Colors.white,
-                                      )
-                                    ),
-                                    child: Image.asset('flags/us.png',package: 'country_list_pick',scale: 4,))
-                            ),
-                            SizedBox(width: 10,),
-                            GestureDetector(
-                                onTap: (){
-                                  print("Greek language selected");
+                                borderColor: selectedLanguage ==
+                                    kSelectedLanguage.English
+                                    ? Colors.red
+                                    : Colors.white,
+                                backgroundColor: selectedLanguage ==
+                                    kSelectedLanguage.English
+                                    ? Colors.red
+                                    : Colors.white,
+                                borderWidth: 2,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              LanguagePicker(
+                                languageFlag: Image.asset(
+                                  'flags/gr.png',
+                                  package: 'country_list_pick',
+                                  scale: 4.5,
+                                ),
+                                onTapped: () {
                                   setState(() {
-                                    selectedLanguage = kSelectedLanguage.Greek;
+                                    selectedLanguage =
+                                        kSelectedLanguage.Greek;
                                   });
                                 },
-                                child: Container(
-                                    decoration: BoxDecoration(
-                                        color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
-                                        border: Border.all(
-                                          width: 2,
-                                          color: selectedLanguage == kSelectedLanguage.Greek ? Colors.red : Colors.white,
-                                        )
-                                    ),
-                                    child: Image.asset('flags/gr.png',package: 'country_list_pick',scale: 5))
-                            ),
-                          ],),
+                                borderColor: selectedLanguage ==
+                                    kSelectedLanguage.Greek
+                                    ? Colors.red
+                                    : Colors.white,
+                                backgroundColor: selectedLanguage ==
+                                    kSelectedLanguage.Greek
+                                    ? Colors.red
+                                    : Colors.white,
+                                borderWidth: 2,
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ),
@@ -156,9 +164,11 @@ class _CaseScreenState extends State<CaseScreen> {
                       child: Column(
                         children: <Widget>[
                           Center(
-                            //WORLDWIDE TITLE HEADER
+                              //WORLDWIDE TITLE HEADER
                               child: Text(
-                            selectedLanguage==kSelectedLanguage.Greek? 'Παγκόσμια' : 'Worldwide',
+                            selectedLanguage == kSelectedLanguage.Greek
+                                ? 'Παγκόσμια'
+                                : 'Worldwide',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontFamily: 'Cardo',
@@ -185,11 +195,15 @@ class _CaseScreenState extends State<CaseScreen> {
                                           child: FadeInLeft(
                                             //Searched worldwide overall cases card
                                             child: CaseCard(
-                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
+                                              text: selectedLanguage ==
+                                                      kSelectedLanguage.Greek
+                                                  ? 'Κρούσματα'
+                                                  : 'Cases',
                                               fontSize: 23,
                                               icon: FontAwesomeIcons.virus,
                                               results: kOverallCases,
-                                              backgroundColor: Color(0xFF363636),
+                                              backgroundColor:
+                                                  Color(0xFF363636),
                                               iconColor: Colors.white,
                                             ),
                                           ),
@@ -199,11 +213,17 @@ class _CaseScreenState extends State<CaseScreen> {
                                     depth: 10,
                                     depthColor: Colors.grey[500],
                                     onTap: () => print('Hello, World!'),
-                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                    shadow: BoxShadow(
+                                        color: Colors.purple[200],
+                                        blurRadius: 30,
+                                        spreadRadius: -20,
+                                        offset: Offset(0, 40)),
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               //CONTAINER WITH SEARCHED RECOVERED
                               Expanded(
                                 child: Container(
@@ -217,7 +237,10 @@ class _CaseScreenState extends State<CaseScreen> {
                                           child: FadeInLeft(
                                             //Searched worldwide recovered cases card
                                             child: CaseCard(
-                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
+                                              text: selectedLanguage ==
+                                                      kSelectedLanguage.Greek
+                                                  ? 'Επανήλθαν'
+                                                  : 'Recovered',
                                               fontSize: 23,
                                               icon: FontAwesomeIcons.thumbsUp,
                                               results: kOverallRecovered,
@@ -231,7 +254,11 @@ class _CaseScreenState extends State<CaseScreen> {
                                     depth: 10,
                                     depthColor: Colors.grey[500],
                                     onTap: () => print('Hello, World!'),
-                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                    shadow: BoxShadow(
+                                        color: Colors.purple[200],
+                                        blurRadius: 30,
+                                        spreadRadius: -20,
+                                        offset: Offset(0, 40)),
                                   ),
                                 ),
                               ),
@@ -256,11 +283,16 @@ class _CaseScreenState extends State<CaseScreen> {
                                           child: FadeInLeft(
                                             //Searched worldwide critical cases card
                                             child: CaseCard(
-                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
+                                              text: selectedLanguage ==
+                                                      kSelectedLanguage.Greek
+                                                  ? 'Κρίσιμα'
+                                                  : 'Critical',
                                               fontSize: 23,
-                                              icon: FontAwesomeIcons.exclamation,
+                                              icon:
+                                                  FontAwesomeIcons.exclamation,
                                               results: kOverallCritical,
-                                              backgroundColor: Color(0xFFff5722),
+                                              backgroundColor:
+                                                  Color(0xFFff5722),
                                               iconColor: Colors.white,
                                             ),
                                           ),
@@ -270,11 +302,17 @@ class _CaseScreenState extends State<CaseScreen> {
                                     depth: 10,
                                     depthColor: Colors.grey[500],
                                     onTap: () => print('Hello, World!'),
-                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                    shadow: BoxShadow(
+                                        color: Colors.purple[200],
+                                        blurRadius: 30,
+                                        spreadRadius: -20,
+                                        offset: Offset(0, 40)),
                                   ),
                                 ),
                               ),
-                              SizedBox(width: 15,),
+                              SizedBox(
+                                width: 15,
+                              ),
                               //CONTAINER WITH SEARCHED DEATHS
                               Expanded(
                                 child: Container(
@@ -288,11 +326,15 @@ class _CaseScreenState extends State<CaseScreen> {
                                           child: FadeInLeft(
                                             //Searched worldwide deaths card
                                             child: CaseCard(
-                                              text: selectedLanguage==kSelectedLanguage.Greek? 'Θανατοι' : 'Deaths',
+                                              text: selectedLanguage ==
+                                                      kSelectedLanguage.Greek
+                                                  ? 'Θανατοι'
+                                                  : 'Deaths',
                                               fontSize: 23,
                                               icon: FontAwesomeIcons.skull,
                                               results: kOverallDeaths,
-                                              backgroundColor: Color(0xFFc70039),
+                                              backgroundColor:
+                                                  Color(0xFFc70039),
                                               iconColor: Colors.white,
                                             ),
                                           ),
@@ -302,7 +344,11 @@ class _CaseScreenState extends State<CaseScreen> {
                                     depth: 10,
                                     depthColor: Colors.grey[500],
                                     onTap: () => print('Hello, World!'),
-                                    shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                    shadow: BoxShadow(
+                                        color: Colors.purple[200],
+                                        blurRadius: 30,
+                                        spreadRadius: -20,
+                                        offset: Offset(0, 40)),
                                   ),
                                 ),
                               ),
@@ -316,7 +362,9 @@ class _CaseScreenState extends State<CaseScreen> {
                     Flash(
                       child: Center(
                           child: Text(
-                            selectedLanguage==kSelectedLanguage.Greek? 'Αναζήτηση χώρας' : 'Search country',
+                        selectedLanguage == kSelectedLanguage.Greek
+                            ? 'Αναζήτηση χώρας'
+                            : 'Search country',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'Cardo',
@@ -325,7 +373,9 @@ class _CaseScreenState extends State<CaseScreen> {
                             fontWeight: FontWeight.w900),
                       )),
                     ),
-                    SizedBox(height: 5,),
+                    SizedBox(
+                      height: 5,
+                    ),
                     //Country picker container
                     Container(
                       color: Colors.white,
@@ -379,11 +429,16 @@ class _CaseScreenState extends State<CaseScreen> {
                                               child: FadeInLeft(
                                                 //Searched overall cases card
                                                 child: CaseCard(
-                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρούσματα' : 'Cases',
+                                                  text: selectedLanguage ==
+                                                          kSelectedLanguage
+                                                              .Greek
+                                                      ? 'Κρούσματα'
+                                                      : 'Cases',
                                                   fontSize: 23,
                                                   icon: FontAwesomeIcons.virus,
                                                   results: confirmedCases,
-                                                  backgroundColor: Color(0xFF363636),
+                                                  backgroundColor:
+                                                      Color(0xFF363636),
                                                   iconColor: Colors.white,
                                                 ),
                                               ),
@@ -393,11 +448,17 @@ class _CaseScreenState extends State<CaseScreen> {
                                         depth: 10,
                                         depthColor: Colors.grey[500],
                                         onTap: () => print('Hello, World!'),
-                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                        shadow: BoxShadow(
+                                            color: Colors.purple[200],
+                                            blurRadius: 30,
+                                            spreadRadius: -20,
+                                            offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 15,),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
                                   //CONTAINER WITH SEARCHED RECOVERED
                                   Expanded(
                                     child: Container(
@@ -411,9 +472,14 @@ class _CaseScreenState extends State<CaseScreen> {
                                               child: FadeInLeft(
                                                 //Searched recovered cases card
                                                 child: CaseCard(
-                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Επανήλθαν' : 'Recovered',
+                                                  text: selectedLanguage ==
+                                                          kSelectedLanguage
+                                                              .Greek
+                                                      ? 'Επανήλθαν'
+                                                      : 'Recovered',
                                                   fontSize: 23,
-                                                  icon: FontAwesomeIcons.thumbsUp,
+                                                  icon:
+                                                      FontAwesomeIcons.thumbsUp,
                                                   results: recovered,
                                                   backgroundColor: Colors.green,
                                                   iconColor: Colors.white,
@@ -425,7 +491,11 @@ class _CaseScreenState extends State<CaseScreen> {
                                         depth: 10,
                                         depthColor: Colors.grey[500],
                                         onTap: () => print('Hello, World!'),
-                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                        shadow: BoxShadow(
+                                            color: Colors.purple[200],
+                                            blurRadius: 30,
+                                            spreadRadius: -20,
+                                            offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
@@ -450,11 +520,17 @@ class _CaseScreenState extends State<CaseScreen> {
                                               child: FadeInLeft(
                                                 //Searched critical cases card
                                                 child: CaseCard(
-                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Κρίσιμα' : 'Critical',
+                                                  text: selectedLanguage ==
+                                                          kSelectedLanguage
+                                                              .Greek
+                                                      ? 'Κρίσιμα'
+                                                      : 'Critical',
                                                   fontSize: 23,
-                                                  icon: FontAwesomeIcons.exclamation,
+                                                  icon: FontAwesomeIcons
+                                                      .exclamation,
                                                   results: critical,
-                                                  backgroundColor: Color(0xFFff5722),
+                                                  backgroundColor:
+                                                      Color(0xFFff5722),
                                                   iconColor: Colors.white,
                                                 ),
                                               ),
@@ -464,11 +540,17 @@ class _CaseScreenState extends State<CaseScreen> {
                                         depth: 10,
                                         depthColor: Colors.grey[500],
                                         onTap: () => print('Hello, World!'),
-                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                        shadow: BoxShadow(
+                                            color: Colors.purple[200],
+                                            blurRadius: 30,
+                                            spreadRadius: -20,
+                                            offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
-                                  SizedBox(width: 15,),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
                                   //CONTAINER WITH SEARCHED DEATHS
                                   Expanded(
                                     child: Container(
@@ -482,11 +564,16 @@ class _CaseScreenState extends State<CaseScreen> {
                                               child: FadeInLeft(
                                                 child: CaseCard(
                                                   //Searched death cases card
-                                                  text: selectedLanguage==kSelectedLanguage.Greek? 'Θάνατοι' : 'Deaths',
+                                                  text: selectedLanguage ==
+                                                          kSelectedLanguage
+                                                              .Greek
+                                                      ? 'Θάνατοι'
+                                                      : 'Deaths',
                                                   fontSize: 23,
                                                   icon: FontAwesomeIcons.skull,
                                                   results: deaths,
-                                                  backgroundColor: Color(0xFFc70039),
+                                                  backgroundColor:
+                                                      Color(0xFFc70039),
                                                   iconColor: Colors.white,
                                                 ),
                                               ),
@@ -496,7 +583,11 @@ class _CaseScreenState extends State<CaseScreen> {
                                         depth: 10,
                                         depthColor: Colors.grey[500],
                                         onTap: () => print('Hello, World!'),
-                                        shadow: BoxShadow(color: Colors.purple[200], blurRadius: 30, spreadRadius: -20, offset: Offset(0, 40)),
+                                        shadow: BoxShadow(
+                                            color: Colors.purple[200],
+                                            blurRadius: 30,
+                                            spreadRadius: -20,
+                                            offset: Offset(0, 40)),
                                       ),
                                     ),
                                   ),
@@ -505,7 +596,6 @@ class _CaseScreenState extends State<CaseScreen> {
                             ],
                           )
                         ],
-
                       ),
                     ),
                   ],

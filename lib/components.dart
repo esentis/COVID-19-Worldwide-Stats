@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'constants.dart';
 import 'package:animate_do/animate_do.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
 
@@ -47,6 +45,31 @@ class CaseCard extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LanguagePicker extends StatelessWidget {
+
+  LanguagePicker({this.onTapped,this.backgroundColor,this.languageFlag,this.borderColor,this.borderWidth});
+  final Function onTapped;
+  final Color backgroundColor;
+  final Color borderColor;
+  final Widget languageFlag;
+  final double borderWidth;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTapped,
+      child: Container(
+        decoration: BoxDecoration(
+            color: backgroundColor,
+            border: Border.all(
+              width: borderWidth,
+              color: borderColor,
+            )
+        ),
+        child: languageFlag,),
     );
   }
 }

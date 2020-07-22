@@ -17,6 +17,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       //Using the dark theme
       //Redirecting to the cases_screen.dart
+      theme: ThemeData.dark().copyWith(
+        textTheme: Theme.of(context).textTheme.apply(
+          bodyColor: Colors.black,
+          displayColor: Colors.black,
+        ),
+      ),
       home: CaseScreen(),
     );
   }

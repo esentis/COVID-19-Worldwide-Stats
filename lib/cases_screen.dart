@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'virus_data.dart';
 import 'constants.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
@@ -159,7 +160,22 @@ class _CaseScreenState extends State<CaseScreen> {
                         ],
                       ),
                     ),
-                    Text(kOverallCases),
+                    Center(
+                      child: Text(
+                        "Worldwide cases",
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 25, color: Colors.white),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        kOverallCases,
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      ),
+                    ),
                     SizedBox(height: 40),
                     //Simple flash animation indicating the search capability
                     Flash(
@@ -169,11 +185,10 @@ class _CaseScreenState extends State<CaseScreen> {
                             ? 'Αναζήτηση χώρας'
                             : 'Search country',
                         textAlign: TextAlign.center,
-                        style: TextStyle(
-                            fontFamily: 'Cardo',
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900),
+                              style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 35,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.white),
                       )),
                     ),
                     SizedBox(
@@ -181,7 +196,6 @@ class _CaseScreenState extends State<CaseScreen> {
                     ),
                     //Country picker container
                     Container(
-                      color: Colors.white,
                       child: CountryListPick(
                         // to show or hide flag
                         isShowFlag: true,
@@ -234,7 +248,7 @@ class _CaseScreenState extends State<CaseScreen> {
                               locale: LocaleType.en);
                         },
                         child: Text(
-                          'show date time picker (english)',
+                          'Date Picker',
                           style: TextStyle(color: Colors.blue),
                         )),
                   ],

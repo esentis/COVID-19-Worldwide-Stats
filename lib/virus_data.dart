@@ -1,5 +1,7 @@
+
 import 'constants.dart';
 import 'networking.dart';
+
 
 //Our main app brain ,here are all the functions
 class VirusData {
@@ -25,16 +27,5 @@ class VirusData {
         new NetworkHelper(url: countryByCodeUrl + countryCode);
     var casesByCountryCode = await networkByCountryCode.getData();
     return casesByCountryCode;
-  }
-
-  Future<String> dailyReportByCountryCode(
-      String countryCode, String date) async {
-    //2020-04-01
-    String dailyReportUrl =
-        "https://covid-19-data.p.rapidapi.com/report/country/code?&date-format=YYYY-MM-DD&date=$date&code=$countryCode";
-    NetworkHelper networkByCountryCode =
-        new NetworkHelper(url: dailyReportUrl);
-    var dailyReportByCountryCode = await networkByCountryCode.getData();
-    return dailyReportByCountryCode;
   }
 }

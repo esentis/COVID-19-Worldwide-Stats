@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,12 +42,50 @@ class _CountryScreenState extends State<CountryScreen> {
     });
   }
 
+  Future<void> getCountryReport() async {
+    //YYYY-MM-DD
+    var firstDate = "2020-2-1";
+    var response =
+        await virusData.dailyReportByCountryCode(countryCode, firstDate);
+    print(response);
+    print(jsonDecode(response)[0]['provinces'][0]['confirmed']);
+//    FlatButton(
+//        onPressed: () {
+//          DatePicker.showDatePicker(context,
+//              showTitleActions: true,
+//              minTime: DateTime(2020, 2, 5),
+//              maxTime: DateTime(2020, 6, 7),
+//              onChanged: (date) {
+//                print('change $date');
+//              }, onConfirm: (date) async {
+//                print('confirm $date');
+//
+//                //YYYY-MM-DD
+//                var firstDate =
+//                    "${date.year}-${date.month}-${date.day}";
+//                var response =
+//                await virusData.dailyReportByCountryCode(
+//                    countryCode, firstDate);
+//                print(response);
+//                print(
+//                    "The country is ${countryCode} and on $firstDate it had ${jsonDecode(response)[0]['provinces'][0]['confirmed'] ?? "zero"} confirmed cases ");
+//              },
+//              currentTime: DateTime.now(),
+//              locale: LocaleType.en);
+//        },
+//        child: Text(
+//          'Date Picker',
+//          style: TextStyle(color: Colors.blue),
+//        )),
+  }
+
   @override
   void initState() {
     super.initState();
     arguments = Get.arguments;
     updateUI(arguments[0]);
     countryCode = arguments[0];
+    getCountryReport();
   }
 
   @override
@@ -108,34 +147,29 @@ class _CountryScreenState extends State<CountryScreen> {
                           color: Colors.white,
                         ),
                       ),
-//                      FlatButton(
-//                          onPressed: () {
-//                            DatePicker.showDatePicker(context,
-//                                showTitleActions: true,
-//                                minTime: DateTime(2020, 2, 5),
-//                                maxTime: DateTime(2020, 6, 7),
-//                                onChanged: (date) {
-//                              print('change $date');
-//                            }, onConfirm: (date) async {
-//                              print('confirm $date');
-//
-//                              //YYYY-MM-DD
-//                              var dateForSearch =
-//                                  "${date.year}-${date.month}-${date.day}";
-//                              var response =
-//                                  await virusData.dailyReportByCountryCode(
-//                                      countryCode, dateForSearch);
-//                              print(response);
-//                              print(
-//                                  "The country is ${countryCode} and on $dateForSearch it had ${jsonDecode(response)[0]['provinces'][0]['confirmed'] ?? "zero"} confirmed cases ");
-//                            },
-//                                currentTime: DateTime.now(),
-//                                locale: LocaleType.en);
-//                          },
-//                          child: Text(
-//                            'Date Picker',
-//                            style: TextStyle(color: Colors.blue),
-//                          )),
+                      LineChart(
+                        LineChartData(
+                          backgroundColor: Colors.red.withOpacity(0.2),
+                          lineBarsData: [
+                            LineChartBarData(
+                                isCurved: true,
+                                barWidth: 3,
+                                spots: [
+                                  FlSpot(2, 2),
+                                  FlSpot(3, 1),
+                                  FlSpot(4, 4),
+                                  FlSpot(5, 3),
+                                ],
+                                aboveBarData: BarAreaData(
+                                    colors: [Colors.black, Colors.greenAccent]),
+                                curveSmoothness: 0.6,
+                                colors: [
+                                  Colors.blue,
+                                  Colors.yellow
+                                ])
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
+import '../constants.dart';
 import 'package:animate_do/animate_do.dart';
 
 class CaseCard extends StatelessWidget {

@@ -1,24 +1,24 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'virus_data.dart';
-import 'constants.dart';
+import '../virus_data.dart';
+import '../constants.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:convert';
-import 'components.dart';
+import '../components/components.dart';
 import 'package:country_list_pick/country_list_pick.dart';
 
 String gCountryCode = '';
 
-class CaseScreen extends StatefulWidget {
+class MainScreen extends StatefulWidget {
   @override
-  _CaseScreenState createState() => _CaseScreenState();
+  _MainScreenState createState() => _MainScreenState();
 }
 
-class _CaseScreenState extends State<CaseScreen> {
+class _MainScreenState extends State<MainScreen> {
   //A new instance of VirusData to access search methods
   VirusData virusData = new VirusData();
 
@@ -58,31 +58,6 @@ class _CaseScreenState extends State<CaseScreen> {
 
   kSelectedLanguage selectedLanguage = kSelectedLanguage.Greek;
   //----------------------------------------------------------------//
-
-  //Method that updates the searched country UI
-  Future<void> updateUI(CountryCode code) async {
-    // name of country
-    print(code.name);
-    // code of country
-    print(code.code);
-    // code phone of country
-    print(code.dialCode);
-    // path flag of country
-    print(code.flagUri);
-    showSpinner = true;
-    chosenCountry = code.code.toLowerCase();
-    countryName = code.name;
-    searchedCountryResults =
-        await virusData.getCasesByCountryCode(chosenCountry);
-    confirmedCases =
-        jsonDecode(searchedCountryResults)[0]['confirmed'].toString();
-    recovered = jsonDecode(searchedCountryResults)[0]['recovered'].toString();
-    critical = jsonDecode(searchedCountryResults)[0]['critical'].toString();
-    deaths = jsonDecode(searchedCountryResults)[0]['deaths'].toString();
-    setState(() {
-      showSpinner = false;
-    });
-  }
 
   //Main build method of cases screen
   @override
@@ -181,14 +156,14 @@ class _CaseScreenState extends State<CaseScreen> {
                     Flash(
                       child: Center(
                           child: Text(
-                        selectedLanguage == kSelectedLanguage.Greek
+                            selectedLanguage == kSelectedLanguage.Greek
                             ? 'Αναζήτηση χώρας'
                             : 'Search country',
                         textAlign: TextAlign.center,
-                              style: GoogleFonts.gfsNeohellenic(
-                                  fontSize: 35,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white),
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 35,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
                       )),
                     ),
                     SizedBox(
@@ -207,50 +182,16 @@ class _CaseScreenState extends State<CaseScreen> {
                         initialSelection: '+62',
                         // to get feedback data from picker
                         onChanged: (CountryCode countryCode) async {
-                          updateUI(countryCode);
-                          gCountryCode = countryCode.code.toLowerCase();
+                          List arguments = [
+                            countryCode.code.toLowerCase(),
+                            countryCode.flagUri,
+                            countryCode.name
+                          ];
+                          Get.toNamed('/countryScreen',
+                              arguments: arguments);
                         },
                       ),
                     ),
-//                    Image.asset('flags/aq.png',package: 'country_list_pick',scale: 1.5,),
-                    //COUNTRY NAME TITLE
-                    Center(
-                        child: Text(
-                      countryName,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Cardo',
-                          color: Colors.white,
-                          fontSize: 40,
-                          fontWeight: FontWeight.w900),
-                    )),
-                    FlatButton(
-                        onPressed: () {
-                          DatePicker.showDatePicker(context,
-                              showTitleActions: true,
-                              minTime: DateTime(2020, 2, 5),
-                              maxTime: DateTime(2020, 6, 7), onChanged: (date) {
-                            print('change $date');
-                          }, onConfirm: (date) async {
-                            print('confirm $date');
-
-                            //YYYY-MM-DD
-                            var dateForSearch =
-                                "${date.year}-${date.month}-${date.day}";
-                            var response =
-                                await virusData.dailyReportByCountryCode(
-                                    gCountryCode, dateForSearch);
-                            print(jsonDecode(response)[0]);
-                            print(
-                                "The country is $gCountryCode and on $dateForSearch it had confirmed cases ${jsonDecode(response)[0]['provinces'][0]['confirmed']} ");
-                          },
-                              currentTime: DateTime.now(),
-                              locale: LocaleType.en);
-                        },
-                        child: Text(
-                          'Date Picker',
-                          style: TextStyle(color: Colors.blue),
-                        )),
                   ],
                 ),
                 onRefresh: () async {

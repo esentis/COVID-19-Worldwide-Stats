@@ -53,7 +53,7 @@ class _CountryScreenState extends State<CountryScreen> {
     //YYYY-MM-DD
     for (var i = 0; i < dates.length; i++) {
       var response =
-      await virusData.dailyReportByCountryCode(countryCode, dates[i]);
+          await virusData.dailyReportByCountryCode(countryCode, dates[i]);
       var active = jsonDecode(response)[0]['provinces'][0]['active'];
       print(active);
       if (active == null) {
@@ -82,127 +82,124 @@ class _CountryScreenState extends State<CountryScreen> {
         child: SafeArea(
           child: Scaffold(
             backgroundColor: Color(0xFF202040),
-            body: Center(
-              child: Column(
-                children: [
-                  Text(
-                    arguments[2],
-                    style: GoogleFonts.gfsNeohellenic(
-                        fontSize: 35, color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(160),
-                        child: Image.asset(
-                          arguments[1],
-                          package: 'country_list_pick',
-                          scale: 1.5,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text(
+                      arguments[2],
+                      style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 35, color: Colors.white),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(160),
+                          child: Image.asset(
+                            arguments[1],
+                            package: 'country_list_pick',
+                            scale: 1.5,
+                          ),
                         ),
-                      ),
-                      SizedBox(width: 5,),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        textBaseline: TextBaseline.alphabetic,
-                        children: [
-                          Text(
-                            "${resultsList[0].toString()} overall",
-                            style: GoogleFonts.gfsNeohellenic(
-                              fontSize: 30,
-                              color: Colors.white,
+                        SizedBox(
+                          width: 15,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          textBaseline: TextBaseline.alphabetic,
+                          children: [
+                            Text(
+                              "${resultsList[0].toString()} overall",
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${resultsList[1].toString()} recovered",
-                            style: GoogleFonts.gfsNeohellenic(
-                              fontSize: 30,
-                              color: Colors.white,
+                            Text(
+                              "${resultsList[1].toString()} recovered",
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${resultsList[2].toString()} critical",
-                            style: GoogleFonts.gfsNeohellenic(
-                              fontSize: 30,
-                              color: Colors.white,
+                            Text(
+                              "${resultsList[2].toString()} critical",
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                          Text(
-                            "${resultsList[3].toString()} deaths",
-                            style: GoogleFonts.gfsNeohellenic(
-                              fontSize: 30,
-                              color: Colors.white,
+                            Text(
+                              "${resultsList[3].toString()} deaths",
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                  SizedBox(
-                    height: 40,
-                  ),
-                  LineChart(
-                    LineChartData(
-
-                      backgroundColor: Colors.transparent,
-                      axisTitleData: FlAxisTitleData(
-                        bottomTitle: AxisTitle(
-                            titleText: 'Dates',
-                            showTitle: true,
-                            textStyle:
-                            GoogleFonts.gfsNeohellenic(fontSize: 25)),
-                        leftTitle: AxisTitle(
-                            titleText: 'Active Cases',
-                            showTitle: true,
-                            textStyle:
-                            GoogleFonts.gfsNeohellenic(fontSize: 25)),
-                        topTitle: AxisTitle(
-                            titleText: 'Active Cases timeline',
-                            showTitle: true,
-                            textStyle:
-                            GoogleFonts.gfsNeohellenic(fontSize: 25)),
-                      ),
-                      lineBarsData: [
-                        LineChartBarData(
-                          isCurved: true,
-                          show: true,
-                          curveSmoothness: 0.5,
-                          belowBarData: BarAreaData(
-                            show: true,
-                            colors: [
-                              Colors.blueGrey.withOpacity(0.5),
-                              Colors.red
-                            ],
-                          ),
-                          shadow: Shadow(
-                            color: Colors.white,
-                          ),
-                          barWidth: 3,
-                          spots: [
-                            FlSpot(1, casesByDate[0]),
-                            FlSpot(2, casesByDate[1]),
-                            FlSpot(3, casesByDate[2]),
-                            FlSpot(4, casesByDate[3]),
-                            FlSpot(5, casesByDate[4]),
-                            FlSpot(6, casesByDate[5]),
-                            FlSpot(7, casesByDate[6]),
-                          ],
-                          preventCurveOverShooting: true,
-                          colors: [
-                            Colors.black.withOpacity(0.5),
-                            Colors.grey.withOpacity(0.5),
-                            Colors.red,
                           ],
                         )
                       ],
                     ),
+                  ],
+                ),
+                SizedBox(),
+                LineChart(
+                  LineChartData(
+                    backgroundColor: Colors.transparent,
+                    axisTitleData: FlAxisTitleData(
+                      bottomTitle: AxisTitle(
+                          titleText: 'Dates',
+                          showTitle: true,
+                          textStyle: GoogleFonts.gfsNeohellenic(fontSize: 25)),
+                      leftTitle: AxisTitle(
+                          titleText: 'Active Cases',
+                          showTitle: true,
+                          textStyle: GoogleFonts.gfsNeohellenic(fontSize: 25)),
+                      topTitle: AxisTitle(
+                          titleText: 'Active Cases timeline',
+                          showTitle: true,
+                          textStyle: GoogleFonts.gfsNeohellenic(fontSize: 25)),
+                    ),
+                    lineBarsData: [
+                      LineChartBarData(
+                        isCurved: true,
+                        show: true,
+                        curveSmoothness: 0.5,
+                        belowBarData: BarAreaData(
+                          show: true,
+                          colors: [
+                            Colors.blueGrey.withOpacity(0.5),
+                            Colors.red
+                          ],
+                        ),
+                        shadow: Shadow(
+                          color: Colors.white,
+                        ),
+                        barWidth: 3,
+                        spots: [
+                          FlSpot(1, casesByDate[0]),
+                          FlSpot(2, casesByDate[1]),
+                          FlSpot(3, casesByDate[2]),
+                          FlSpot(4, casesByDate[3]),
+                          FlSpot(5, casesByDate[4]),
+                          FlSpot(6, casesByDate[5]),
+                          FlSpot(7, casesByDate[6]),
+                        ],
+                        preventCurveOverShooting: true,
+                        colors: [
+                          Colors.black.withOpacity(0.5),
+                          Colors.grey.withOpacity(0.5),
+                          Colors.red,
+                        ],
+                      )
+                    ],
                   ),
-                ],
-              ),
+                ),
+                SizedBox()
+              ],
             ),
           ),
         ));

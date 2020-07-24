@@ -1,5 +1,5 @@
 # COVID-19 Worldwide Stats Tracker
-
+![Flutter CI](https://github.com/esentis/COVID-19-Worldwide-Stats/workflows/Flutter%20CI/badge.svg)
 Aim of the app is to inform people about the current situation.
 ## Screenshots
 ![COVID-19 Stats Demo](/ss1.gif)

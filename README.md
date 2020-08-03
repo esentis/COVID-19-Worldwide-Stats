@@ -5,6 +5,7 @@
 Aim of the app is to inform people about the current situation.
 ## Screenshots
 ![alt text](https://i.imgur.com/mSnMIu1m.gif "Screenshot 1")
+![](https://i.imgur.com/mSnMIu1m.gif)
 ![alt text](https://i.imgur.com/RbY5rElm.gif "Screenshot 2")
 ![alt text](https://i.imgur.com/vPIDSR2m.gif "Screenshot 3")
 

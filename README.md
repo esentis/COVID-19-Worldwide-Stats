@@ -4,9 +4,9 @@
 
 Aim of the app is to inform people about the current situation.
 ## Screenshots
-![alt text](https://i.imgur.com/mSnMIu1l.gif "Screenshot 1")
-![alt text](https://i.imgur.com/RbY5rEll.gif "Screenshot 2")
-![alt text](https://i.imgur.com/vPIDSR2l.gif "Screenshot 3")
+![alt text](https://i.imgur.com/mSnMIu1m.gif "Screenshot 1")
+![alt text](https://i.imgur.com/RbY5rElm.gif "Screenshot 2")
+![alt text](https://i.imgur.com/vPIDSR2m.gif "Screenshot 3")
 
 ## Technical Details
 The app is made in Flutter/Dart.

@@ -83,6 +83,7 @@ class _MainScreenState extends State<MainScreen> {
                             height: 20,
                           ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
                               LanguagePicker(
                                 languageFlag: Image.asset(
@@ -97,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
                                   });
                                 },
                                 borderColor: selectedLanguage ==
-                                        kSelectedLanguage.English
+                                    kSelectedLanguage.English
                                     ? Colors.red
                                     : Colors.white,
                                 backgroundColor: selectedLanguage ==
@@ -105,6 +106,38 @@ class _MainScreenState extends State<MainScreen> {
                                     ? Colors.red
                                     : Colors.white,
                                 borderWidth: 2,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Column(
+                                children: [
+                                  CustomPaint(
+                                    painter: MyPainter(),
+                                    child: SizedBox(
+                                      width: 110,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "2 meters distance",
+                                    style: GoogleFonts.gfsNeohellenic(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  CustomPaint(
+                                    painter: MyPainter(),
+                                    child: SizedBox(
+                                      width: 110,
+                                    ),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 width: 10,
@@ -134,6 +167,9 @@ class _MainScreenState extends State<MainScreen> {
                           ),
                         ],
                       ),
+                    ),
+                    SizedBox(
+                      height: 25,
                     ),
                     Center(
                       child: Text(
@@ -178,8 +214,6 @@ class _MainScreenState extends State<MainScreen> {
                         isShowTitle: true,
                         // to show or hide down icon
                         isDownIcon: true,
-                        // to initial code number country
-                        initialSelection: '+62',
                         isShowCode: true,
                         showEnglishName: true,
                         // to get feedback data from picker
@@ -201,4 +235,21 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ));
   }
+}
+
+class MyPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final arrowLine = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 5
+      ..color = Colors.white;
+    canvas.drawLine(Offset.zero, Offset(110, 0), arrowLine);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
+  }
+
 }

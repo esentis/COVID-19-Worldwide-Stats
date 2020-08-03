@@ -2,9 +2,9 @@
 ![Flutter CI](https://github.com/esentis/COVID-19-Worldwide-Stats/workflows/Flutter%20CI/badge.svg)
 Aim of the app is to inform people about the current situation.
 ## Screenshots
-![COVID-19 Stats Demo](/ss1.gif)
-![COVID-19 Stats Demo](/ss2.gif)
-![COVID-19 Stats Demo](/ss3.gif)
+![alt text](https://i.imgur.com/mSnMIu1l.gif "Screenshot 1")
+![alt text](https://i.imgur.com/RbY5rEll.gif "Screenshot 2")
+![alt text](https://i.imgur.com/vPIDSR2l.gif "Screenshot 3")
 
 ## Technical Details
 The app is made in Flutter/Dart.

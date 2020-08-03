@@ -9,6 +9,9 @@ Aim of the app is to inform people about the current situation.
 ![alt text](https://i.imgur.com/2v0iS3lm.png "Screenshot 3")
 ![alt text](https://i.imgur.com/hyTyMgnm.png "Screenshot 4")
 ![alt text](https://i.imgur.com/PVs4dzkm.png "Screenshot 5")
+![alt text](https://i.imgur.com/WoMp5Wqm.png "Screenshot 6")
+![alt text](https://i.imgur.com/XmT529Ym.png "Screenshot 7")
+![alt text](https://i.imgur.com/k7hI4mNm.png "Screenshot 8")
 
 
 ## Technical Details

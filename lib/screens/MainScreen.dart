@@ -180,6 +180,8 @@ class _MainScreenState extends State<MainScreen> {
                         isDownIcon: true,
                         // to initial code number country
                         initialSelection: '+62',
+                        isShowCode: true,
+                        showEnglishName: true,
                         // to get feedback data from picker
                         onChanged: (CountryCode countryCode) async {
                           List arguments = [
@@ -187,8 +189,7 @@ class _MainScreenState extends State<MainScreen> {
                             countryCode.flagUri,
                             countryCode.name
                           ];
-                          Get.toNamed('/countryScreen',
-                              arguments: arguments);
+                          Get.toNamed('/countryScreen', arguments: arguments);
                         },
                       ),
                     ),

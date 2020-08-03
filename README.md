@@ -4,11 +4,11 @@
 
 Aim of the app is to inform people about the current situation.
 ## Screenshots
-![alt text](https://i.imgur.com/Is3Jw8ol.png "Screenshot 1")
-![alt text](https://i.imgur.com/BVsx7Yal.png "Screenshot 2")
-![alt text](https://i.imgur.com/2v0iS3ll.png "Screenshot 3")
-![alt text](https://i.imgur.com/hyTyMgnl.png "Screenshot 4")
-![alt text](https://i.imgur.com/PVs4dzkl.png "Screenshot 5")
+![alt text](https://i.imgur.com/Is3Jw8om.png "Screenshot 1")
+![alt text](https://i.imgur.com/BVsx7Yam.png "Screenshot 2")
+![alt text](https://i.imgur.com/2v0iS3lm.png "Screenshot 3")
+![alt text](https://i.imgur.com/hyTyMgnm.png "Screenshot 4")
+![alt text](https://i.imgur.com/PVs4dzkm.png "Screenshot 5")
 
 
 ## Technical Details
@@ -24,6 +24,8 @@ Libraries used :
 | animate_do | ^1.7.1 | https://pub.dev/packages/animate_do |
 | modal_progress_hud | ^0.1.3 | https://github.com/mmcc007/modal_progress_hud |
 | country_list_pick | ^1.0.0+2 | https://github.com/hifiaz/country-list-pick |
-| hover_effect | ^0.6.0 | https://github.com/mkiisoft/hover_effect |
+| fl_chart  | ^0.10.1 | https://pub.dev/packages/fl_chart | 
+| get  | ^3.4.0 | https://pub.dev/packages/get |
+| google_fonts  | ^1.1.0 | https://pub.dev/packages/google_fonts |
 
 ## Stay safe, stay home

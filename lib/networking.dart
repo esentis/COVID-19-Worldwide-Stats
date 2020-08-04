@@ -7,7 +7,7 @@ class NetworkHelper {
   final String url;
   Future getData() async {
     //getting the response
-    http.Response response = await http.get(url, headers: {
+    var response = await http.get(url, headers: {
       'x-rapidapi-host': '${DotEnv().env['API_HOST']}',
       'x-rapidapi-key': '${DotEnv().env['API_KEY']}'
     });

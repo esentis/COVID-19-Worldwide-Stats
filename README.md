@@ -30,5 +30,7 @@ Libraries used :
 | fl_chart  | ^0.10.1 | https://pub.dev/packages/fl_chart | 
 | get  | ^3.4.0 | https://pub.dev/packages/get |
 | google_fonts  | ^1.1.0 | https://pub.dev/packages/google_fonts |
+| flutter_launcher_icons  | ^0.7.5 | https://pub.dev/packages/flutter_launcher_icons |
+| pedantic  | ^1.9.0 | https://pub.dev/packages/pedantic |
 
 ## Stay safe, stay home

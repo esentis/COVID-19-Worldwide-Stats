@@ -1,3 +1,4 @@
+// ignore_for_file: all
 name: covid19worldwide
 description: Covid-19 Worldwide Cases  Tracker
 
@@ -39,6 +40,7 @@ dependencies:
   get: ^3.4.0
   fl_chart: ^0.10.1
   flutter_launcher_icons: ^0.7.5
+  pedantic: ^1.9.0
 
   # To add assets to your application, add an assets section, like this:
 

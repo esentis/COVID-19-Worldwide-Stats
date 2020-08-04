@@ -28,4 +28,4 @@ const String countryUrl =
 const String countryByCodeUrl =
     'https://covid-19-data.p.rapidapi.com/country/code?format=undefined&code=';
 const String dailyReportUrl =
-    "https://covid-19-data.p.rapidapi.com/report/country/code?format=json&date-format=YYYY-MM-DD&date=2020-04-01&code=it";
+    'https://covid-19-data.p.rapidapi.com/report/country/code?format=json&date-format=YYYY-MM-DD&date=2020-04-01&code=it';

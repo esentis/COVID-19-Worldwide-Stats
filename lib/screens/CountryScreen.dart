@@ -33,7 +33,7 @@ List dates = [
 List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 class _CountryScreenState extends State<CountryScreen> {
-  VirusData virusData = new VirusData();
+  VirusData virusData = VirusData();
 
   //Method that updates the searched country UI
   Future<void> updateUI(String name) async {
@@ -127,28 +127,28 @@ class _CountryScreenState extends State<CountryScreen> {
                           textBaseline: TextBaseline.alphabetic,
                           children: [
                             Text(
-                              "${resultsList[0].toString()} overall",
+                              '${resultsList[0].toString()} overall',
                               style: GoogleFonts.gfsNeohellenic(
                                 fontSize: 25,
                                 color: Colors.white,
                               ),
                             ),
                             Text(
-                              "${resultsList[1].toString()} recovered",
+                              '${resultsList[1].toString()} recovered',
                               style: GoogleFonts.gfsNeohellenic(
                                 fontSize: 25,
                                 color: Colors.white,
                               ),
                             ),
                             Text(
-                              "${resultsList[2].toString()} critical",
+                              '${resultsList[2].toString()} critical',
                               style: GoogleFonts.gfsNeohellenic(
                                 fontSize: 25,
                                 color: Colors.white,
                               ),
                             ),
                             Text(
-                              "${resultsList[3].toString()} deaths",
+                              '${resultsList[3].toString()} deaths',
                               style: GoogleFonts.gfsNeohellenic(
                                 fontSize: 25,
                                 color: Colors.white,

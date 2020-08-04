@@ -33,15 +33,17 @@ class _MainScreenState extends State<MainScreen> {
   //The method that gets initialized on page load, gets overall cases
   void fetchData() async {
     kFetchedOverallCases = await virusData.getOverallCases();
+    print(kFetchedOverallCases);
+    print(jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total'].toString());
     //Set state of overall cases card
     setState(() {
       kOverallCases =
-          jsonDecode(kFetchedOverallCases)[0]['confirmed'].toString();
-      kOverallDeaths = jsonDecode(kFetchedOverallCases)[0]['deaths'].toString();
+          jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total'].toString();
+      kOverallDeaths = jsonDecode(kFetchedOverallCases)['response'][0]['deaths']['total'].toString();
       kOverallRecovered =
-          jsonDecode(kFetchedOverallCases)[0]['recovered'].toString();
+          jsonDecode(kFetchedOverallCases)['response'][0]['cases']['recovered'].toString();
       kOverallCritical =
-          jsonDecode(kFetchedOverallCases)[0]['critical'].toString();
+          jsonDecode(kFetchedOverallCases)['response'][0]['cases']['critical'].toString();
     });
   }
 

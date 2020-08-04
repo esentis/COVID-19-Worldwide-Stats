@@ -21,7 +21,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
 
   //A new instance of VirusData to access search methods
-  VirusData virusData = new VirusData();
+  VirusData virusData = VirusData();
 
   //This is called exactly when the screen loads
   @override
@@ -125,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
                                     height: 10,
                                   ),
                                   Text(
-                                    "2 meters distance",
+                                    '2 meters distance',
                                     style: GoogleFonts.gfsNeohellenic(
                                       fontSize: 20,
                                       color: Colors.white,
@@ -176,7 +176,7 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Center(
                       child: Text(
-                        "Worldwide cases",
+                        'Worldwide cases',
                         style: GoogleFonts.gfsNeohellenic(
                             fontSize: 25, color: Colors.white),
                       ),
@@ -221,12 +221,12 @@ class _MainScreenState extends State<MainScreen> {
                         showEnglishName: true,
                         // to get feedback data from picker
                         onChanged: (CountryCode countryCode) async {
-                          List arguments = [
+                          var arguments = [
                             countryCode.code.toLowerCase(),
                             countryCode.flagUri,
                             countryCode.name
                           ];
-                          Get.toNamed('/countryScreen', arguments: arguments);
+                          await Get.toNamed('/countryScreen', arguments: arguments);
                         },
                       ),
                     ),

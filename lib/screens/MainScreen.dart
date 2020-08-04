@@ -19,6 +19,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+
   //A new instance of VirusData to access search methods
   VirusData virusData = new VirusData();
 

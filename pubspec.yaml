@@ -16,6 +16,11 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.1.0 <3.0.0"
 
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/icon/icon.png"
+
 dependencies:
   flutter:
     sdk: flutter
@@ -33,6 +38,7 @@ dependencies:
   google_fonts: ^1.1.0
   get: ^3.4.0
   fl_chart: ^0.10.1
+  flutter_launcher_icons: ^0.7.5
 
   # To add assets to your application, add an assets section, like this:
 

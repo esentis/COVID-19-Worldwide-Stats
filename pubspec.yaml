@@ -38,9 +38,9 @@ dependencies:
   country_list_pick: ^1.0.0+2
   google_fonts: ^1.1.0
   get: ^3.4.0
-  fl_chart: ^0.10.1
+  fl_chart: ^0.11.0
   flutter_launcher_icons: ^0.7.5
-  pedantic: ^1.8.0+1
+  pedantic: ^1.9.0
 
   # To add assets to your application, add an assets section, like this:
 

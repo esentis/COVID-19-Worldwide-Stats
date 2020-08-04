@@ -19,19 +19,19 @@ class VirusData {
     return casesByCountryName;
   }
 
-  //A methods that calls API for Cases by Country code (gr,it,fr,gb etc)
-  Future<String> getCasesByCountryCode(String countryCode) async {
-    NetworkHelper networkByCountryCode =
-        new NetworkHelper(url: countryByCodeUrl + countryCode);
-    var casesByCountryCode = await networkByCountryCode.getData();
-    return casesByCountryCode;
-  }
+//  //A methods that calls API for Cases by Country code (gr,it,fr,gb etc)
+//  Future<String> getCasesByCountryCode(String countryCode) async {
+//    NetworkHelper networkByCountryCode =
+//        new NetworkHelper(url: countryByCodeUrl + countryCode);
+//    var casesByCountryCode = await networkByCountryCode.getData();
+//    return casesByCountryCode;
+//  }
 
   Future<String> dailyReportByCountryCode(
-      String countryCode, String date) async {
+      String countryName, String date) async {
     //2020-04-01
     String dailyReportUrl =
-        "https://covid-19-data.p.rapidapi.com/report/country/code?&date-format=YYYY-MM-DD&date=$date&code=$countryCode";
+        "https://covid-193.p.rapidapi.com/history?day=$date&country=$countryName";
     NetworkHelper networkByCountryCode =
         new NetworkHelper(url: dailyReportUrl);
     var dailyReportByCountryCode = await networkByCountryCode.getData();

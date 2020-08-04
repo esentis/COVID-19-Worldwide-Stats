@@ -16,62 +16,77 @@ class CountryScreen extends StatefulWidget {
 
 bool showSpinner = true;
 String countryCode = '';
+String countryName = '';
 List<String> resultsList = ['', '', '', ''];
 List arguments = ['', '', ''];
 List dates = [
-  '2020-3-1',
-  '2020-4-15',
-  '2020-5-1',
-  '2020-5-15',
-  '2020-6-1',
-  '2020-6-10',
-  '2020-6-18',
+  '2020-04-01',
+  '2020-04-15',
+  '2020-05-01',
+  '2020-05-15',
+  '2020-06-01',
+  '2020-06-15',
+  '2020-07-01',
+  '2020-07-15',
+  '2020-08-01',
 ];
-List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0];
+List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 class _CountryScreenState extends State<CountryScreen> {
   VirusData virusData = new VirusData();
 
   //Method that updates the searched country UI
-  Future<void> updateUI(String code) async {
-    List<String> results;
-    var searchedCountryResults = await virusData.getCasesByCountryCode(code);
-    var confirmedCases =
-        jsonDecode(searchedCountryResults)[0]['confirmed'].toString();
-    var recovered =
-        jsonDecode(searchedCountryResults)[0]['recovered'].toString();
-    var critical = jsonDecode(searchedCountryResults)[0]['critical'].toString();
-    var deaths = jsonDecode(searchedCountryResults)[0]['deaths'].toString();
-    results = [confirmedCases, recovered, critical, deaths];
-    resultsList = results;
-    setState(() {
-      showSpinner = false;
-    });
+  Future<void> updateUI(String name) async {
+    var searchedCountryResults = await virusData.getCasesByCountryName(name);
+    print(searchedCountryResults);
+    try {
+      resultsList[0] = jsonDecode(searchedCountryResults)['response'][0]
+              ['cases']['total']
+          .toString();
+      resultsList[1] = jsonDecode(searchedCountryResults)['response'][0]
+              ['cases']['recovered']
+          .toString();
+      resultsList[2] = jsonDecode(searchedCountryResults)['response'][0]
+              ['cases']['critical']
+          .toString();
+      resultsList[3] = jsonDecode(searchedCountryResults)['response'][0]
+              ['deaths']['total']
+          .toString();
+    } catch (e) {
+      print (e.toString());
+      resultsList = ['-', '-', '-', '-'];
+    }
   }
 
   Future<void> getCountryReport() async {
+    setState(() {
+      showSpinner = true;
+    });
     //YYYY-MM-DD
     for (var i = 0; i < dates.length; i++) {
       var response =
-          await virusData.dailyReportByCountryCode(countryCode, dates[i]);
-      var active = jsonDecode(response)[0]['provinces'][0]['active'];
-      print(active);
-      if (active == null) {
-        casesByDate[i] = 0.toDouble();
-      } else {
-        casesByDate[i] = active.toDouble();
+          await virusData.dailyReportByCountryCode(countryName, dates[i]);
+      try {
+        casesByDate[i] =
+            jsonDecode(response)['response'][0]['cases']['total'].toDouble();
+        print(casesByDate);
+      } catch (e) {
+        print(e.toString());
+        casesByDate[i] = 0;
       }
-      print(casesByDate);
     }
-    setState(() {});
+    setState(() {
+      showSpinner = false;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     arguments = Get.arguments;
-    updateUI(arguments[0]);
+    updateUI(arguments[2]);
     countryCode = arguments[0];
+    countryName = arguments[2];
     getCountryReport();
   }
 

@@ -22,9 +22,9 @@ const kResultsTextStyle = TextStyle(fontSize: 24, fontFamily: 'Cardo');
 const kOverallTextStyle =
     TextStyle(fontSize: 30, fontFamily: 'Cardo', color: Colors.white);
 //THE API URLS THAT OUR APP CALLS
-const String totalsUrl = 'https://covid-19-data.p.rapidapi.com/totals';
+const String totalsUrl = 'https://covid-193.p.rapidapi.com/statistics?country=All';
 const String countryUrl =
-    'https://covid-19-data.p.rapidapi.com/country?format=undefined&name=';
+    'https://covid-193.p.rapidapi.com/statistics?country=';
 const String countryByCodeUrl =
     'https://covid-19-data.p.rapidapi.com/country/code?format=undefined&code=';
 const String dailyReportUrl =

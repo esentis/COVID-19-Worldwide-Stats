@@ -96,7 +96,7 @@ class _CountryScreenState extends State<CountryScreen> {
         inAsyncCall: showSpinner,
         child: SafeArea(
           child: Scaffold(
-            backgroundColor: Color(0xFF202040),
+            backgroundColor: const Color(0xFF202040),
             body: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -118,7 +118,7 @@ class _CountryScreenState extends State<CountryScreen> {
                             scale: 1.5,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 15,
                         ),
                         Column(
@@ -160,7 +160,7 @@ class _CountryScreenState extends State<CountryScreen> {
                     ),
                   ],
                 ),
-                SizedBox(),
+                const SizedBox(),
                 LineChart(
                   LineChartData(
                     backgroundColor: Colors.transparent,
@@ -190,7 +190,7 @@ class _CountryScreenState extends State<CountryScreen> {
                             Colors.red
                           ],
                         ),
-                        shadow: Shadow(
+                        shadow: const Shadow(
                           color: Colors.white,
                         ),
                         barWidth: 3,
@@ -213,7 +213,7 @@ class _CountryScreenState extends State<CountryScreen> {
                     ],
                   ),
                 ),
-                SizedBox()
+                const SizedBox()
               ],
             ),
           ),

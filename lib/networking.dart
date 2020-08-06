@@ -8,8 +8,8 @@ class NetworkHelper {
   Future getData() async {
     //getting the response
     var response = await http.get(url, headers: {
-      'x-rapidapi-host': '${DotEnv().env['API_HOST']}',
-      'x-rapidapi-key': '${DotEnv().env['API_KEY']}'
+      'x-rapidapi-host': DotEnv().env['API_HOST'],
+      'x-rapidapi-key': DotEnv().env['API_KEY']
     });
     return response.body;
   }

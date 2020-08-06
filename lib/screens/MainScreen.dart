@@ -59,21 +59,21 @@ class _MainScreenState extends State<MainScreen> {
   String critical = '-';
   String deaths = '-';
 
-  kSelectedLanguage selectedLanguage = kSelectedLanguage.Greek;
+  kSelectedLanguage selectedLanguage = kSelectedLanguage.greek;
   //----------------------------------------------------------------//
 
   //Main build method of cases screen
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFF202040),
+        backgroundColor: const Color(0xFF202040),
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: SafeArea(
             //Pull the page to refresh
             child: LiquidPullToRefresh(
                 height: 150,
-                backgroundColor: Color(0xFF202040),
+                backgroundColor: const Color(0xFF202040),
                 color: Colors.white,
                 child: ListView(
                   children: <Widget>[
@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           Row(
@@ -97,31 +97,31 @@ class _MainScreenState extends State<MainScreen> {
                                 onTapped: () {
                                   setState(() {
                                     selectedLanguage =
-                                        kSelectedLanguage.English;
+                                        kSelectedLanguage.english;
                                   });
                                 },
                                 borderColor: selectedLanguage ==
-                                    kSelectedLanguage.English
+                                    kSelectedLanguage.english
                                     ? Colors.red
                                     : Colors.white,
                                 backgroundColor: selectedLanguage ==
-                                        kSelectedLanguage.English
+                                        kSelectedLanguage.english
                                     ? Colors.red
                                     : Colors.white,
                                 borderWidth: 2,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Column(
                                 children: [
                                   CustomPaint(
                                     painter: MyPainter(),
-                                    child: SizedBox(
+                                    child: const SizedBox(
                                       width: 110,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   Text(
@@ -131,18 +131,18 @@ class _MainScreenState extends State<MainScreen> {
                                       color: Colors.white,
                                     ),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   ),
                                   CustomPaint(
                                     painter: MyPainter(),
-                                    child: SizedBox(
+                                    child: const SizedBox(
                                       width: 110,
                                     ),
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               LanguagePicker(
@@ -153,15 +153,15 @@ class _MainScreenState extends State<MainScreen> {
                                 ),
                                 onTapped: () {
                                   setState(() {
-                                    selectedLanguage = kSelectedLanguage.Greek;
+                                    selectedLanguage = kSelectedLanguage.greek;
                                   });
                                 },
                                 borderColor:
-                                    selectedLanguage == kSelectedLanguage.Greek
+                                    selectedLanguage == kSelectedLanguage.greek
                                         ? Colors.red
                                         : Colors.white,
                                 backgroundColor:
-                                    selectedLanguage == kSelectedLanguage.Greek
+                                    selectedLanguage == kSelectedLanguage.greek
                                         ? Colors.red
                                         : Colors.white,
                                 borderWidth: 2,
@@ -171,7 +171,7 @@ class _MainScreenState extends State<MainScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 25,
                     ),
                     Center(
@@ -190,12 +190,12 @@ class _MainScreenState extends State<MainScreen> {
                             color: Colors.white),
                       ),
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     //Simple flash animation indicating the search capability
                     Flash(
                       child: Center(
                           child: Text(
-                            selectedLanguage == kSelectedLanguage.Greek
+                            selectedLanguage == kSelectedLanguage.greek
                             ? 'Αναζήτηση χώρας'
                             : 'Search country',
                         textAlign: TextAlign.center,
@@ -205,7 +205,7 @@ class _MainScreenState extends State<MainScreen> {
                             color: Colors.white),
                       )),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     //Country picker container
@@ -243,11 +243,11 @@ class _MainScreenState extends State<MainScreen> {
 class MyPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    final arrowLine = Paint()
+    var arrowLine = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 5
       ..color = Colors.white;
-    canvas.drawLine(Offset.zero, Offset(110, 0), arrowLine);
+    canvas.drawLine(Offset.zero, const Offset(110, 0), arrowLine);
   }
 
   @override

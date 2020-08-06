@@ -26,7 +26,7 @@ class CaseCard extends StatelessWidget {
             color: Colors.white,
             width: 4,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(20))),
+          borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -43,7 +43,7 @@ class CaseCard extends StatelessWidget {
                   color: iconColor,
                   size: 25,
                 )),
-                SizedBox(
+                const SizedBox(
                   width: 15,
                 ),
                 Text(results, style: kOverallTextStyle),
@@ -57,7 +57,7 @@ class CaseCard extends StatelessWidget {
 }
 
 class LanguagePicker extends StatelessWidget {
-  LanguagePicker(
+  const LanguagePicker(
       {this.onTapped,
       this.backgroundColor,
       this.languageFlag,

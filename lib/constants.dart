@@ -14,7 +14,7 @@ String kFetchedCasesByCountry;
 String kFetchedCasesByCountryGR;
 String kFetchedCasesByCountryCode;
 
-enum kSelectedLanguage { Greek, English }
+enum kSelectedLanguage { greek, english }
 
 const kResultsNumberStyle =
     TextStyle(fontSize: 25, fontFamily: 'Cardo', color: Colors.white);

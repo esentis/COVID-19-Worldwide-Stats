@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 //LIST OF CONSTANTS USED ACROSS THE APP
 String kOverallCases = '';
 String kOverallDeaths = '';
+String kOverallNewDeaths = '';
+String kOverallNewCases = '';
 String kOverallCritical = '';
+String kUpdateDate = '';
+String kUpdateTime = '';
 String kOverallRecovered = '';
 String kCasesByCountry = '';
 String kCasesByCountryGR = '';

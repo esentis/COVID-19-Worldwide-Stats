@@ -19,7 +19,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
   //A new instance of VirusData to access search methods
   VirusData virusData = VirusData();
 
@@ -35,16 +34,32 @@ class _MainScreenState extends State<MainScreen> {
   void fetchData() async {
     kFetchedOverallCases = await virusData.getOverallCases();
     print(kFetchedOverallCases);
-    print(jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total'].toString());
+    print(jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total']
+        .toString());
     //Set state of overall cases card
     setState(() {
-      kOverallCases =
-          jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total'].toString();
-      kOverallDeaths = jsonDecode(kFetchedOverallCases)['response'][0]['deaths']['total'].toString();
-      kOverallRecovered =
-          jsonDecode(kFetchedOverallCases)['response'][0]['cases']['recovered'].toString();
-      kOverallCritical =
-          jsonDecode(kFetchedOverallCases)['response'][0]['cases']['critical'].toString();
+      kOverallCases = jsonDecode(kFetchedOverallCases)['response'][0]['cases']
+              ['total']
+          .toString();
+      kUpdateDate =
+          jsonDecode(kFetchedOverallCases)['response'][0]['day'].toString();
+      kUpdateTime =
+          jsonDecode(kFetchedOverallCases)['response'][0]['time'].toString();
+      kOverallNewCases = jsonDecode(kFetchedOverallCases)['response'][0]
+              ['cases']['new']
+          .toString();
+      kOverallNewDeaths = jsonDecode(kFetchedOverallCases)['response'][0]
+              ['deaths']['new']
+          .toString();
+      kOverallDeaths = jsonDecode(kFetchedOverallCases)['response'][0]['deaths']
+              ['total']
+          .toString();
+      kOverallRecovered = jsonDecode(kFetchedOverallCases)['response'][0]
+              ['cases']['recovered']
+          .toString();
+      kOverallCritical = jsonDecode(kFetchedOverallCases)['response'][0]
+              ['cases']['critical']
+          .toString();
     });
   }
 
@@ -101,7 +116,7 @@ class _MainScreenState extends State<MainScreen> {
                                   });
                                 },
                                 borderColor: selectedLanguage ==
-                                    kSelectedLanguage.english
+                                        kSelectedLanguage.english
                                     ? Colors.red
                                     : Colors.white,
                                 backgroundColor: selectedLanguage ==
@@ -176,18 +191,80 @@ class _MainScreenState extends State<MainScreen> {
                     ),
                     Center(
                       child: Text(
+                        'Last update',
+                        style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        kUpdateTime != ''
+                            ? '${kUpdateTime.substring(11, 19)} $kUpdateDate'
+                            : '',
+                        style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 25,
+                    ),
+                    Center(
+                      child: Text(
                         'Worldwide cases',
                         style: GoogleFonts.gfsNeohellenic(
-                            fontSize: 25, color: Colors.white),
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Center(
                       child: Text(
                         kOverallCases,
                         style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 50,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        'New cases',
+                        style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        kOverallNewCases,
+                        style: GoogleFonts.gfsNeohellenic(
                             fontSize: 50,
                             fontWeight: FontWeight.w600,
-                            color: Colors.white),
+                            color: Colors.redAccent),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        'New deaths',
+                        style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 25,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        kOverallNewDeaths,
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.redAccent),
                       ),
                     ),
                     const SizedBox(height: 40),
@@ -195,7 +272,7 @@ class _MainScreenState extends State<MainScreen> {
                     Flash(
                       child: Center(
                           child: Text(
-                            selectedLanguage == kSelectedLanguage.greek
+                        selectedLanguage == kSelectedLanguage.greek
                             ? 'Αναζήτηση χώρας'
                             : 'Search country',
                         textAlign: TextAlign.center,
@@ -226,7 +303,8 @@ class _MainScreenState extends State<MainScreen> {
                             countryCode.flagUri,
                             countryCode.name
                           ];
-                          await Get.toNamed('/countryScreen', arguments: arguments);
+                          await Get.toNamed('/countryScreen',
+                              arguments: arguments);
                         },
                       ),
                     ),
@@ -254,5 +332,4 @@ class MyPainter extends CustomPainter {
   bool shouldRepaint(CustomPainter oldDelegate) {
     return false;
   }
-
 }

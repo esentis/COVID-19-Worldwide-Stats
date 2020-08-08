@@ -17,7 +17,7 @@ class CountryScreen extends StatefulWidget {
 bool showSpinner = true;
 String countryCode = '';
 String countryName = '';
-List<String> resultsList = ['', '', '', ''];
+List<String> resultsList = ['', '', '', '', '', '', ''];
 List arguments = ['', '', ''];
 List dates = [
   '2020-04-01',
@@ -52,9 +52,14 @@ class _CountryScreenState extends State<CountryScreen> {
       resultsList[3] = jsonDecode(searchedCountryResults)['response'][0]
               ['deaths']['total']
           .toString();
+      resultsList[4] =
+          jsonDecode(searchedCountryResults)['response'][0]['cases']['new'];
+      resultsList[5] = jsonDecode(searchedCountryResults)['response'][0]['day'];
+      resultsList[6] =
+          jsonDecode(searchedCountryResults)['response'][0]['time'];
     } catch (e) {
-      print (e.toString());
-      resultsList = ['-', '-', '-', '-'];
+      print(e.toString());
+      resultsList = ['-', '-', '-', '-', '-', '-', '-'];
     }
   }
 
@@ -107,15 +112,36 @@ class _CountryScreenState extends State<CountryScreen> {
                       style: GoogleFonts.gfsNeohellenic(
                           fontSize: 35, color: Colors.white),
                     ),
+                    const SizedBox(
+                      height: 13,
+                    ),
+                    Text(
+                      'Updated on',
+                      style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 19, color: Colors.white),
+                    ),
+                    Text(
+                      resultsList[5] != ''
+                          ? '${resultsList[5]} ${resultsList[6].substring(11, 19)}'
+                          : '',
+                      style: GoogleFonts.gfsNeohellenic(
+                          fontSize: 19, color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 13,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(160),
-                          child: Image.asset(
-                            arguments[1],
-                            package: 'country_list_pick',
-                            scale: 1.5,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 25.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Image.asset(
+                              arguments[1],
+                              package: 'country_list_pick',
+                              scale: 1.8,
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -149,6 +175,13 @@ class _CountryScreenState extends State<CountryScreen> {
                             ),
                             Text(
                               '${resultsList[3].toString()} deaths',
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              '${resultsList[4].toString()} new cases',
                               style: GoogleFonts.gfsNeohellenic(
                                 fontSize: 25,
                                 color: Colors.white,

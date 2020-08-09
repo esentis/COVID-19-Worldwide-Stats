@@ -94,17 +94,14 @@ class ElevatedCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(
-        horizontal: 15.0,
+        horizontal: 14.0,
       ),
       child: Material(
         elevation: 10,
         borderRadius: BorderRadius.circular(20),
         color: Colors.red.withOpacity(0.5),
         shadowColor: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: widget,
-        ),
+        child: widget,
       ),
     );
   }

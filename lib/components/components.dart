@@ -84,3 +84,20 @@ class LanguagePicker extends StatelessWidget {
     );
   }
 }
+
+class ElevatedCard extends StatelessWidget {
+  const ElevatedCard({
+    this.widget,
+  });
+  final Widget widget;
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 10,
+      borderRadius: BorderRadius.circular(20),
+      color: Colors.red.withOpacity(0.5),
+      shadowColor: Colors.white,
+      child: widget,
+    );
+  }
+}

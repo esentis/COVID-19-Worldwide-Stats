@@ -189,84 +189,103 @@ class _MainScreenState extends State<MainScreen> {
                     const SizedBox(
                       height: 25,
                     ),
-                    Center(
-                      child: Text(
-                        'Last update',
-                        style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
+                    ElevatedCard(
+                      color: Colors.redAccent.withOpacity(0.5),
+                      child: Column(
+                        children: [
+                          Center(
+                            child: Text(
+                              'Last update',
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              kUpdateTime != ''
+                                  ? '${kUpdateTime.substring(11, 19)} $kUpdateDate'
+                                  : '',
+                              style: GoogleFonts.gfsNeohellenic(
+                                fontSize: 25,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        kUpdateTime != ''
-                            ? '${kUpdateTime.substring(11, 19)} $kUpdateDate'
-                            : '',
-                        style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+
                     const SizedBox(
                       height: 25,
                     ),
-                    Center(
-                      child: Text(
-                        'Worldwide cases',
-                        style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 25,
-                          color: Colors.white,
+                    ElevatedCard(
+                      color: Colors.redAccent.withOpacity(0.1),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Center(
+                              child: Text(
+                                'Worldwide cases',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                kOverallCases,
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                'New cases',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                kOverallNewCases,
+                                style: GoogleFonts.gfsNeohellenic(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.redAccent),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                'New deaths',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Center(
+                              child: Text(
+                                kOverallNewDeaths,
+                                style: GoogleFonts.gfsNeohellenic(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.redAccent),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                    Center(
-                      child: Text(
-                        kOverallCases,
-                        style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 50,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'New cases',
-                        style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        kOverallNewCases,
-                        style: GoogleFonts.gfsNeohellenic(
-                            fontSize: 50,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.redAccent),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        'New deaths',
-                        style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 25,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        kOverallNewDeaths,
-                        style: GoogleFonts.gfsNeohellenic(
-                            fontSize: 50,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.redAccent),
-                      ),
-                    ),
+
                     const SizedBox(height: 40),
                     //Simple flash animation indicating the search capability
                     Flash(
@@ -286,26 +305,29 @@ class _MainScreenState extends State<MainScreen> {
                       height: 5,
                     ),
                     //Country picker container
-                    Container(
-                      child: CountryListPick(
-                        // to show or hide flag
-                        isShowFlag: true,
-                        // true to show  title country or false to code phone country
-                        isShowTitle: true,
-                        // to show or hide down icon
-                        isDownIcon: true,
-                        isShowCode: true,
-                        showEnglishName: true,
-                        // to get feedback data from picker
-                        onChanged: (CountryCode countryCode) async {
-                          var arguments = [
-                            countryCode.code.toLowerCase(),
-                            countryCode.flagUri,
-                            countryCode.name
-                          ];
-                          await Get.toNamed('/countryScreen',
-                              arguments: arguments);
-                        },
+                    ElevatedCard(
+                      color: Colors.red.withOpacity(0.5),
+                      child: Container(
+                        child: CountryListPick(
+                          // to show or hide flag
+                          isShowFlag: true,
+                          // true to show  title country or false to code phone country
+                          isShowTitle: true,
+                          // to show or hide down icon
+                          isDownIcon: true,
+                          isShowCode: true,
+                          showEnglishName: true,
+                          // to get feedback data from picker
+                          onChanged: (CountryCode countryCode) async {
+                            var arguments = [
+                              countryCode.code.toLowerCase(),
+                              countryCode.flagUri,
+                              countryCode.name
+                            ];
+                            await Get.toNamed('/countryScreen',
+                                arguments: arguments);
+                          },
+                        ),
                       ),
                     ),
                   ],

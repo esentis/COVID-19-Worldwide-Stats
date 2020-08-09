@@ -87,9 +87,11 @@ class LanguagePicker extends StatelessWidget {
 
 class ElevatedCard extends StatelessWidget {
   const ElevatedCard({
-    this.widget,
+    this.child,
+    this.color,
   });
-  final Widget widget;
+  final Widget child;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -99,9 +101,9 @@ class ElevatedCard extends StatelessWidget {
       child: Material(
         elevation: 10,
         borderRadius: BorderRadius.circular(20),
-        color: Colors.red.withOpacity(0.5),
+        color: color,
         shadowColor: Colors.white,
-        child: widget,
+        child: child,
       ),
     );
   }

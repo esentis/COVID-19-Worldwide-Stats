@@ -79,6 +79,7 @@ class LanguageFlag extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: backgroundColor,
+            borderRadius: BorderRadius.circular(20),
             border: Border.all(
               width: borderWidth,
               color: borderColor,
@@ -246,15 +247,19 @@ class LanguagePicker extends StatelessWidget {
   const LanguagePicker({
     @required this.onEnglishTap,
     @required this.onGreekTap,
-    @required this.flagBorderColor,
-    @required this.flagBackgroundColor,
+    @required this.usFlagBorderColor,
+    @required this.usFlagBackgroundColor,
     @required this.distanceText,
+    @required this.grFlagBackgroundColor,
+    @required this.grFlagBorderColor,
   });
 
   final Function onEnglishTap;
   final Function onGreekTap;
-  final Color flagBorderColor;
-  final Color flagBackgroundColor;
+  final Color usFlagBorderColor;
+  final Color usFlagBackgroundColor;
+  final Color grFlagBorderColor;
+  final Color grFlagBackgroundColor;
   final String distanceText;
   @override
   Widget build(BuildContext context) {
@@ -262,14 +267,17 @@ class LanguagePicker extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         LanguageFlag(
-          languageFlag: Image.asset(
-            'flags/us.png',
-            package: 'country_list_pick',
-            scale: 4,
+          languageFlag: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              'flags/us.png',
+              package: 'country_list_pick',
+              scale: 4,
+            ),
           ),
           onTapped: onEnglishTap,
-          borderColor: flagBorderColor,
-          backgroundColor: flagBackgroundColor,
+          borderColor: usFlagBorderColor,
+          backgroundColor: usFlagBackgroundColor,
           borderWidth: 2,
         ),
         const SizedBox(
@@ -308,14 +316,17 @@ class LanguagePicker extends StatelessWidget {
           width: 10,
         ),
         LanguageFlag(
-          languageFlag: Image.asset(
-            'flags/gr.png',
-            package: 'country_list_pick',
-            scale: 4.5,
+          languageFlag: ClipRRect(
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              'flags/gr.png',
+              package: 'country_list_pick',
+              scale: 4.5,
+            ),
           ),
           onTapped: onGreekTap,
-          borderColor: flagBorderColor,
-          backgroundColor: flagBackgroundColor,
+          borderColor: grFlagBackgroundColor,
+          backgroundColor: grFlagBackgroundColor,
           borderWidth: 2,
         ),
       ],

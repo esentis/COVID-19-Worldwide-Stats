@@ -112,14 +112,22 @@ class _MainScreenState extends State<MainScreen> {
                                 selectedLanguage = kSelectedLanguage.greek;
                               });
                             },
-                            flagBorderColor:
+                            usFlagBorderColor:
                                 selectedLanguage == kSelectedLanguage.english
                                     ? Colors.red
-                                    : Colors.white,
-                            flagBackgroundColor:
+                                    : Colors.transparent,
+                            usFlagBackgroundColor:
                                 selectedLanguage == kSelectedLanguage.english
                                     ? Colors.red
-                                    : Colors.white,
+                                    : Colors.transparent,
+                            grFlagBorderColor:
+                                selectedLanguage == kSelectedLanguage.english
+                                    ? Colors.transparent
+                                    : Colors.red,
+                            grFlagBackgroundColor:
+                                selectedLanguage == kSelectedLanguage.english
+                                    ? Colors.transparent
+                                    : Colors.red,
                           ),
                         ],
                       ),

@@ -94,9 +94,13 @@ class ElevatedCard extends StatelessWidget {
   const ElevatedCard({
     this.child,
     this.color,
+    this.elevation,
+    this.shadowColor,
   });
   final Widget child;
   final Color color;
+  final double elevation;
+  final Color shadowColor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -104,10 +108,10 @@ class ElevatedCard extends StatelessWidget {
         horizontal: 14.0,
       ),
       child: Material(
-        elevation: 10,
+        elevation: elevation,
         borderRadius: BorderRadius.circular(20),
         color: color,
-        shadowColor: Colors.white,
+        shadowColor: shadowColor,
         child: child,
       ),
     );
@@ -126,7 +130,9 @@ class MainScreenCases extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.red.withOpacity(0.2),
+      color: const Color(0xFFbe5683).withOpacity(0.4),
+      shadowColor: Colors.black,
+      elevation: 15,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -199,7 +205,7 @@ class LinePaint extends CustomPainter {
     var arrowLine = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 5
-      ..color = Colors.white;
+      ..color = const Color(0xFFbe5683).withOpacity(0.4);
     canvas.drawLine(Offset.zero, const Offset(110, 0), arrowLine);
   }
 
@@ -217,7 +223,9 @@ class CountrySearcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.red.withOpacity(0.5),
+      color: const Color(0xFFbe5683).withOpacity(0.4),
+      shadowColor: Colors.black,
+      elevation: 15,
       child: Container(
         child: CountryListPick(
           // to show or hide flag
@@ -297,8 +305,9 @@ class LanguagePicker extends StatelessWidget {
             Text(
               distanceText,
               style: GoogleFonts.gfsNeohellenic(
-                fontSize: 20,
-                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFFbe5683),
               ),
             ),
             const SizedBox(
@@ -342,7 +351,9 @@ class UpdateDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.redAccent.withOpacity(0.5),
+      color: const Color(0xFFbe5683).withOpacity(0.4),
+      shadowColor: Colors.black,
+      elevation: 25,
       child: Column(
         children: [
           Center(

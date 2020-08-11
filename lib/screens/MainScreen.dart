@@ -81,15 +81,15 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFF202040),
+        backgroundColor: const Color(0xFFffe4e4),
         body: ModalProgressHUD(
           inAsyncCall: showSpinner,
           child: SafeArea(
             //Pull the page to refresh
             child: LiquidPullToRefresh(
                 height: 150,
-                backgroundColor: const Color(0xFF202040),
-                color: Colors.white,
+                backgroundColor: const Color(0xFFbe5683),
+                color: Colors.transparent,
                 child: ListView(
                   children: <Widget>[
                     Padding(

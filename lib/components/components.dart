@@ -93,10 +93,14 @@ class LanguageFlag extends StatelessWidget {
 class ElevatedCard extends StatelessWidget {
   const ElevatedCard({
     this.child,
-    this.color,
+    this.elevation,
+    this.shadowColor,
+    this.gradientColors,
   });
   final Widget child;
-  final Color color;
+  final List<Color> gradientColors;
+  final double elevation;
+  final Color shadowColor;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -104,11 +108,19 @@ class ElevatedCard extends StatelessWidget {
         horizontal: 14.0,
       ),
       child: Material(
-        elevation: 10,
-        borderRadius: BorderRadius.circular(20),
-        color: color,
-        shadowColor: Colors.white,
-        child: child,
+        color: Colors.transparent,
+        elevation: elevation,
+        shadowColor: shadowColor,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: gradientColors),
+          ),
+          child: child,
+        ),
       ),
     );
   }
@@ -119,24 +131,35 @@ class MainScreenCases extends StatelessWidget {
     this.newCases,
     this.newDeaths,
     this.overallCases,
+    this.casesText,
+    this.newDeathsText,
+    this.newCasesText,
   });
   final String overallCases;
   final String newCases;
   final String newDeaths;
+  final String casesText;
+  final String newCasesText;
+  final String newDeathsText;
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.red.withOpacity(0.2),
+      gradientColors: [
+        const Color(0xFF848ccf),
+        const Color(0xFF322f3d),
+      ],
+      shadowColor: Colors.black,
+      elevation: 15,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Center(
               child: Text(
-                'Worldwide cases',
+                casesText,
                 style: GoogleFonts.gfsNeohellenic(
                   fontSize: 25,
-                  color: Colors.white,
+                  color: const Color(0xFFebecf1).withOpacity(0.8),
                 ),
               ),
             ),
@@ -146,16 +169,16 @@ class MainScreenCases extends StatelessWidget {
                 style: GoogleFonts.gfsNeohellenic(
                   fontSize: 50,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white,
+                  color: const Color(0xFFebecf1).withOpacity(0.8),
                 ),
               ),
             ),
             Center(
               child: Text(
-                'New cases',
+                newCasesText,
                 style: GoogleFonts.gfsNeohellenic(
                   fontSize: 25,
-                  color: Colors.white,
+                  color: const Color(0xFFebecf1).withOpacity(0.8),
                 ),
               ),
             ),
@@ -165,15 +188,15 @@ class MainScreenCases extends StatelessWidget {
                 style: GoogleFonts.gfsNeohellenic(
                     fontSize: 50,
                     fontWeight: FontWeight.w600,
-                    color: Colors.orangeAccent),
+                    color: Colors.orangeAccent.withOpacity(0.8)),
               ),
             ),
             Center(
               child: Text(
-                'New deaths',
+                newDeathsText,
                 style: GoogleFonts.gfsNeohellenic(
                   fontSize: 25,
-                  color: Colors.white,
+                  color: const Color(0xFFebecf1).withOpacity(0.8),
                 ),
               ),
             ),
@@ -181,9 +204,10 @@ class MainScreenCases extends StatelessWidget {
               child: Text(
                 kOverallNewDeaths,
                 style: GoogleFonts.gfsNeohellenic(
-                    fontSize: 50,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.redAccent),
+                  fontSize: 50,
+                  fontWeight: FontWeight.w600,
+                  color: const Color(0xFFcf1b1b).withOpacity(0.8),
+                ),
               ),
             ),
           ],
@@ -199,7 +223,7 @@ class LinePaint extends CustomPainter {
     var arrowLine = Paint()
       ..style = PaintingStyle.stroke
       ..strokeWidth = 5
-      ..color = Colors.white;
+      ..color = const Color(0xFFebecf1).withOpacity(0.8);
     canvas.drawLine(Offset.zero, const Offset(110, 0), arrowLine);
   }
 
@@ -217,7 +241,12 @@ class CountrySearcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.red.withOpacity(0.5),
+      gradientColors: [
+        const Color(0xFF848ccf),
+        const Color(0xFF322f3d),
+      ],
+      shadowColor: Colors.black,
+      elevation: 15,
       child: Container(
         child: CountryListPick(
           // to show or hide flag
@@ -297,8 +326,9 @@ class LanguagePicker extends StatelessWidget {
             Text(
               distanceText,
               style: GoogleFonts.gfsNeohellenic(
-                fontSize: 20,
-                color: Colors.white,
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xFFebecf1).withOpacity(0.8),
               ),
             ),
             const SizedBox(
@@ -337,33 +367,45 @@ class LanguagePicker extends StatelessWidget {
 class UpdateDate extends StatelessWidget {
   const UpdateDate({
     this.date,
+    this.text,
   });
   final String date;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return ElevatedCard(
-      color: Colors.redAccent.withOpacity(0.5),
-      child: Column(
-        children: [
-          Center(
-            child: Text(
-              'Last update',
-              style: GoogleFonts.gfsNeohellenic(
-                fontSize: 25,
-                color: Colors.white,
+      gradientColors: [
+        const Color(0xFF848ccf),
+        const Color(0xFF322f3d),
+      ],
+      shadowColor: Colors.black,
+      elevation: 25,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10.0),
+        child: Column(
+          children: [
+            Center(
+              child: Text(
+                text,
+                style: GoogleFonts.gfsNeohellenic(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFFebecf1).withOpacity(0.8),
+                ),
               ),
             ),
-          ),
-          Center(
-            child: Text(
-              date,
-              style: GoogleFonts.gfsNeohellenic(
-                fontSize: 25,
-                color: Colors.white,
+            Center(
+              child: Text(
+                date,
+                style: GoogleFonts.gfsNeohellenic(
+                  fontSize: 35,
+                  fontWeight: FontWeight.bold,
+                  color: const Color(0xFFebecf1).withOpacity(0.8),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

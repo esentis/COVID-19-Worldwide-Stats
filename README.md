@@ -7,14 +7,9 @@ Aim of the app is to inform people about the current situation.
 
 ## Screenshots
 
-![alt text](https://i.imgur.com/Is3Jw8om.png "Screenshot 1")
-![alt text](https://i.imgur.com/XmT529Ym.png "Screenshot 2")
-![alt text](https://i.imgur.com/BVsx7Yam.png "Screenshot 3")
-![alt text](https://i.imgur.com/hyTyMgnm.png "Screenshot 4")
-![alt text](https://i.imgur.com/PVs4dzkm.png "Screenshot 5")
-![alt text](https://i.imgur.com/WoMp5Wqm.png "Screenshot 6")
-![alt text](https://i.imgur.com/2v0iS3lm.png "Screenshot 7")
-![alt text](https://i.imgur.com/k7hI4mNm.png "Screenshot 8")
+Main Screen | Countries list | Country screen
+------------ | -------------| ------------- |
+![Alt text](/screenshots/1.gif?raw=true "1") | ![Alt text](/screenshots/2.gif?raw=true "2") | ![Alt text](/screenshots/3.gif?raw=true "3")
 
 ## Libraries
 
@@ -27,7 +22,7 @@ Aim of the app is to inform people about the current situation.
 | animate_do | ^1.7.1 | <https://pub.dev/packages/animate_do> |
 | modal_progress_hud | ^0.1.3 | <https://github.com/mmcc007/modal_progress_hud> |
 | country_list_pick | ^1.0.0+2 | <https://github.com/hifiaz/country-list-pick> |
-| fl_chart  | ^0.10.1 | <https://pub.dev/packages/fl_chart> | 
+| fl_chart  | ^0.10.1 | <https://pub.dev/packages/fl_chart> |
 | get  | ^3.4.0 | <https://pub.dev/packages/get> |
 | google_fonts  | ^1.1.0 | <https://pub.dev/packages/google_fonts> |
 | flutter_launcher_icons  | ^0.7.5 | <https://pub.dev/packages/flutter_launcher_icons> |

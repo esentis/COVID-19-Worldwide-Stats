@@ -7,9 +7,9 @@ Aim of the app is to inform people about the current situation.
 
 ## Screenshots
 
-Main Screen | Countries list | Country screen
------------- | -------------| ------------- |
-![Alt text](/screenshots/1.gif?raw=true "1") | ![Alt text](/screenshots/2.gif?raw=true "2") | ![Alt text](/screenshots/3.gif?raw=true "3")
+Main Screen | Refresh | Countries' list | Country screen
+------------ | -------------| ------------- | ------------- |
+![Alt text](/screenshots/1.gif?raw=true "1") | ![Alt text](/screenshots/4.gif?raw=true "2") | ![Alt text](/screenshots/2.gif?raw=true "3") | ![Alt text](/screenshots/3.gif?raw=true "3")
 
 ## Libraries
 

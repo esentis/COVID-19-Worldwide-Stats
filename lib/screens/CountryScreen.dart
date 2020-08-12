@@ -31,6 +31,7 @@ List dates = [
   '2020-08-01',
 ];
 List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+bool seperator = false;
 
 class _CountryScreenState extends State<CountryScreen> {
   VirusData virusData = VirusData();
@@ -97,159 +98,212 @@ class _CountryScreenState extends State<CountryScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ModalProgressHUD(
-        inAsyncCall: showSpinner,
-        child: SafeArea(
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: const LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Color(0xFF0f4c75),
+            Color(0xFF1b262c),
+          ],
+        ),
+      ),
+      child: ModalProgressHUD(
+          inAsyncCall: showSpinner,
           child: Scaffold(
-            backgroundColor: const Color(0xFF202040),
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  children: [
-                    Text(
-                      arguments[2],
-                      style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 35, color: Colors.white),
-                    ),
-                    const SizedBox(
-                      height: 13,
-                    ),
-                    Text(
-                      'Updated on',
-                      style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 19, color: Colors.white),
-                    ),
-                    Text(
-                      resultsList[5] != ''
-                          ? '${resultsList[5]} ${resultsList[6].substring(11, 19)}'
-                          : '',
-                      style: GoogleFonts.gfsNeohellenic(
-                          fontSize: 19, color: Colors.white),
-                    ),
-                    const SizedBox(
-                      height: 13,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 25.0),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(50),
-                            child: Image.asset(
-                              arguments[1],
-                              package: 'country_list_pick',
-                              scale: 1.8,
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    children: [
+                      Text(
+                        arguments[2],
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 35, color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      Text(
+                        'Updated on',
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 19, color: Colors.white),
+                      ),
+                      Text(
+                        resultsList[5] != ''
+                            ? '${resultsList[5]} ${resultsList[6].substring(11, 19)}'
+                            : '',
+                        style: GoogleFonts.gfsNeohellenic(
+                            fontSize: 19, color: Colors.white),
+                      ),
+                      const SizedBox(
+                        height: 13,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 25.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Image.asset(
+                                arguments[1],
+                                package: 'country_list_pick',
+                                scale: 1.8,
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          width: 15,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          textBaseline: TextBaseline.alphabetic,
-                          children: [
-                            Text(
-                              '${resultsList[0].toString()} overall',
-                              style: GoogleFonts.gfsNeohellenic(
-                                fontSize: 25,
-                                color: Colors.white,
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.baseline,
+                            textBaseline: TextBaseline.alphabetic,
+                            children: [
+                              Text(
+                                '${resultsList[0].toString()} overall',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${resultsList[1].toString()} recovered',
-                              style: GoogleFonts.gfsNeohellenic(
-                                fontSize: 25,
-                                color: Colors.white,
+                              Text(
+                                '${resultsList[1].toString()} recovered',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${resultsList[2].toString()} critical',
-                              style: GoogleFonts.gfsNeohellenic(
-                                fontSize: 25,
-                                color: Colors.white,
+                              Text(
+                                '${resultsList[2].toString()} critical',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${resultsList[3].toString()} deaths',
-                              style: GoogleFonts.gfsNeohellenic(
-                                fontSize: 25,
-                                color: Colors.white,
+                              Text(
+                                '${resultsList[3].toString()} deaths',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                            Text(
-                              '${resultsList[4].toString()} new cases',
-                              style: GoogleFonts.gfsNeohellenic(
-                                fontSize: 25,
-                                color: Colors.white,
+                              Text(
+                                '${resultsList[4].toString()} new cases',
+                                style: GoogleFonts.gfsNeohellenic(
+                                  fontSize: 25,
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-                const SizedBox(),
-                LineChart(
-                  LineChartData(
-                    backgroundColor: Colors.transparent,
-                    axisTitleData: FlAxisTitleData(
-                      bottomTitle: AxisTitle(
-                          titleText: 'Dates',
-                          showTitle: true,
-                          textStyle: GoogleFonts.gfsNeohellenic(fontSize: 25)),
-                      leftTitle: AxisTitle(
-                          titleText: 'Active Cases',
-                          showTitle: true,
-                          textStyle: GoogleFonts.gfsNeohellenic(fontSize: 25)),
-                      topTitle: AxisTitle(
-                          titleText: 'Active Cases timeline',
-                          showTitle: true,
-                          textStyle: GoogleFonts.gfsNeohellenic(fontSize: 25)),
-                    ),
-                    lineBarsData: [
-                      LineChartBarData(
-                        isCurved: true,
-                        show: true,
-                        curveSmoothness: 0.5,
-                        belowBarData: BarAreaData(
-                          show: true,
-                          colors: [
-                            Colors.blueGrey.withOpacity(0.5),
-                            Colors.red
-                          ],
-                        ),
-                        shadow: const Shadow(
-                          color: Colors.white,
-                        ),
-                        barWidth: 3,
-                        spots: [
-                          FlSpot(1, casesByDate[0]),
-                          FlSpot(2, casesByDate[1]),
-                          FlSpot(3, casesByDate[2]),
-                          FlSpot(4, casesByDate[3]),
-                          FlSpot(5, casesByDate[4]),
-                          FlSpot(6, casesByDate[5]),
-                          FlSpot(7, casesByDate[6]),
+                            ],
+                          )
                         ],
-                        preventCurveOverShooting: true,
-                        colors: [
-                          Colors.black.withOpacity(0.5),
-                          Colors.grey.withOpacity(0.5),
-                          Colors.red,
-                        ],
-                      )
+                      ),
                     ],
                   ),
-                ),
-                const SizedBox()
-              ],
+                  LineChart(
+                    LineChartData(
+                      gridData: FlGridData(
+                        show: true,
+                        drawVerticalLine: true,
+                        getDrawingHorizontalLine: (value) {
+                          return FlLine(
+                            color: const Color(0xff37434d),
+                            strokeWidth: 1,
+                          );
+                        },
+                        getDrawingVerticalLine: (value) {
+                          return FlLine(
+                            color: const Color(0xff37434d),
+                            strokeWidth: 1,
+                          );
+                        },
+                      ),
+                      titlesData: FlTitlesData(
+                        show: true,
+                        bottomTitles: SideTitles(
+                          showTitles: true,
+                          reservedSize: 22,
+                          textStyle: const TextStyle(
+                              color: Color(0xff68737d),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                          getTitles: (value) {
+                            switch (value.toInt()) {
+                              case 2:
+                                return dates[2].toString().substring(5, 10);
+                              case 5:
+                                return dates[5].toString().substring(5, 10);
+                              case 8:
+                                return dates[8].toString().substring(5, 10);
+                            }
+                            return '';
+                          },
+                          margin: 10,
+                        ),
+                        leftTitles: SideTitles(
+                          showTitles: true,
+                          textStyle: const TextStyle(
+                            color: Color(0xff67727d),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                          getTitles: (value) {
+                            var result = seperator ? value.toString() : '';
+                            seperator ? seperator = false : seperator = true;
+                            return result;
+                          },
+                          reservedSize: 40,
+                          margin: 12,
+                        ),
+                      ),
+                      borderData: FlBorderData(
+                          show: true,
+                          border: Border.all(
+                              color: const Color(0xff37434d), width: 1)),
+                      minX: 1,
+                      maxX: 9,
+                      minY: 2,
+                      lineBarsData: [
+                        LineChartBarData(
+                          spots: [
+                            FlSpot(1, casesByDate[0]),
+                            FlSpot(2, casesByDate[1]),
+                            FlSpot(3, casesByDate[2]),
+                            FlSpot(4, casesByDate[3]),
+                            FlSpot(5, casesByDate[4]),
+                            FlSpot(6, casesByDate[5]),
+                            FlSpot(7, casesByDate[6]),
+                            FlSpot(8, casesByDate[7]),
+                            FlSpot(9, casesByDate[8]),
+                          ],
+                          show: true,
+                          isCurved: true,
+                          colors: [Colors.red, Colors.green],
+                          barWidth: 5,
+                          isStrokeCapRound: true,
+                          dotData: FlDotData(
+                            show: false,
+                          ),
+                          belowBarData: BarAreaData(
+                            show: true,
+                            colors: [Colors.red, Colors.green]
+                                .map((color) => color.withOpacity(0.3))
+                                .toList(),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
-          ),
-        ));
+          )),
+    );
   }
 }

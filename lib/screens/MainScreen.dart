@@ -74,108 +74,139 @@ class _MainScreenState extends State<MainScreen> {
   String critical = '-';
   String deaths = '-';
 
-  kSelectedLanguage selectedLanguage = kSelectedLanguage.greek;
+  var selectedLanguage = kSelectedLanguage.greek;
   //----------------------------------------------------------------//
 
   //Main build method of cases screen
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: const Color(0xFFffe4e4),
-        body: ModalProgressHUD(
-          inAsyncCall: showSpinner,
-          child: SafeArea(
-            //Pull the page to refresh
-            child: LiquidPullToRefresh(
-                height: 150,
-                backgroundColor: const Color(0xFFbe5683),
-                color: Colors.transparent,
-                child: ListView(
-                  children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.all(10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          LanguagePicker(
-                            onEnglishTap: () {
-                              setState(() {
-                                selectedLanguage = kSelectedLanguage.english;
-                              });
-                            },
-                            distanceText: '2 meters distance',
-                            onGreekTap: () {
-                              setState(() {
-                                selectedLanguage = kSelectedLanguage.greek;
-                              });
-                            },
-                            usFlagBorderColor:
-                                selectedLanguage == kSelectedLanguage.english
-                                    ? Colors.red
-                                    : Colors.transparent,
-                            usFlagBackgroundColor:
-                                selectedLanguage == kSelectedLanguage.english
-                                    ? Colors.red
-                                    : Colors.transparent,
-                            grFlagBorderColor:
-                                selectedLanguage == kSelectedLanguage.english
-                                    ? Colors.transparent
-                                    : Colors.red,
-                            grFlagBackgroundColor:
-                                selectedLanguage == kSelectedLanguage.english
-                                    ? Colors.transparent
-                                    : Colors.red,
-                          ),
-                        ],
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: const LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            Color(0xFF0f4c75),
+            Color(0xFF1b262c),
+          ],
+        ),
+      ),
+      child: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: SafeArea(
+              //Pull the page to refresh
+              child: LiquidPullToRefresh(
+                  height: 150,
+                  backgroundColor: const Color(0xFFbe5683),
+                  color: Colors.transparent,
+                  child: ListView(
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            LanguagePicker(
+                              onEnglishTap: () {
+                                setState(() {
+                                  selectedLanguage = kSelectedLanguage.english;
+                                });
+                              },
+                              distanceText:
+                                  selectedLanguage == kSelectedLanguage.english
+                                      ? '2 meters distance'
+                                      : '2 μέτρα απόσταση',
+                              onGreekTap: () {
+                                setState(() {
+                                  selectedLanguage = kSelectedLanguage.greek;
+                                });
+                              },
+                              usFlagBorderColor:
+                                  selectedLanguage == kSelectedLanguage.english
+                                      ? const Color(0xFFebecf1).withOpacity(0.8)
+                                      : Colors.transparent,
+                              usFlagBackgroundColor:
+                                  selectedLanguage == kSelectedLanguage.english
+                                      ? const Color(0xFFebecf1).withOpacity(0.8)
+                                      : Colors.transparent,
+                              grFlagBorderColor: selectedLanguage ==
+                                      kSelectedLanguage.english
+                                  ? Colors.transparent
+                                  : const Color(0xFFebecf1).withOpacity(0.8),
+                              grFlagBackgroundColor: selectedLanguage ==
+                                      kSelectedLanguage.english
+                                  ? Colors.transparent
+                                  : const Color(0xFFebecf1).withOpacity(0.8),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    UpdateDate(
-                      date: kUpdateTime != ''
-                          ? '${kUpdateTime.substring(11, 19)} $kUpdateDate'
-                          : '',
-                    ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      UpdateDate(
+                        text: selectedLanguage == kSelectedLanguage.english
+                            ? 'Last update'
+                            : 'Τελευταία ενημέρωση',
+                        date: kUpdateTime != ''
+                            ? '${kUpdateTime.substring(11, 19)} $kUpdateDate'
+                            : '',
+                      ),
 
-                    const SizedBox(
-                      height: 25,
-                    ),
-                    MainScreenCases(
-                      newCases: kOverallNewCases,
-                      newDeaths: kOverallNewDeaths,
-                      overallCases: kOverallCases,
-                    ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      MainScreenCases(
+                        newCases: kOverallNewCases,
+                        newDeaths: kOverallNewDeaths,
+                        overallCases: kOverallCases,
+                        casesText: selectedLanguage == kSelectedLanguage.english
+                            ? 'Worldwide cases'
+                            : 'Παγκόσμια κρούσματα',
+                        newCasesText:
+                            selectedLanguage == kSelectedLanguage.english
+                                ? 'New cases'
+                                : 'Καινούργια κρούσματα',
+                        newDeathsText:
+                            selectedLanguage == kSelectedLanguage.english
+                                ? 'New deaths'
+                                : 'Καινούργιοι θάνατοι',
+                      ),
 
-                    const SizedBox(height: 40),
-                    //Simple flash animation indicating the search capability
-                    Flash(
-                      child: Center(
-                          child: Text(
-                        selectedLanguage == kSelectedLanguage.greek
-                            ? 'Αναζήτηση χώρας'
-                            : 'Search country',
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.gfsNeohellenic(
+                      const SizedBox(height: 40),
+                      //Simple flash animation indicating the search capability
+                      Flash(
+                        child: Center(
+                            child: Text(
+                          selectedLanguage == kSelectedLanguage.greek
+                              ? 'Αναζήτηση χώρας'
+                              : 'Search country',
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.gfsNeohellenic(
                             fontSize: 35,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.white),
-                      )),
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    //Country picker container
-                    const CountrySearcher(),
-                  ],
-                ),
-                onRefresh: () async {
-                  fetchData();
-                }),
-          ),
-        ));
+                            fontWeight: FontWeight.bold,
+                            color: const Color(0xFFebecf1).withOpacity(0.8),
+                          ),
+                        )),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      //Country picker container
+                      const CountrySearcher(),
+                    ],
+                  ),
+                  onRefresh: () async {
+                    fetchData();
+                  }),
+            )),
+      ),
+    );
   }
 }

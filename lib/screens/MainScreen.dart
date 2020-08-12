@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../virus_data.dart';
 import '../constants.dart';
@@ -9,7 +8,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:convert';
 import '../components/components.dart';
-import 'package:country_list_pick/country_list_pick.dart';
 
 String gCountryCode = '';
 

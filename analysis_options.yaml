@@ -9,6 +9,7 @@ analyzer:
   exclude:
     - build/**
     - pubspec.yaml
+    - .env
 linter:
   rules:
     - always_declare_return_types

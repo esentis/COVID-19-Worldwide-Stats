@@ -1,7 +1,6 @@
 # COVID-19 Worldwide Stats Tracker
 
 ![Flutter CI](https://github.com/esentis/COVID-19-Worldwide-Stats/workflows/Flutter%20CI/badge.svg)
-[![Codemagic build status](https://api.codemagic.io/apps/5f1b4db288aa9042c607c29d/5f1b4db288aa9042c607c29c/status_badge.svg)](https://codemagic.io/apps/5f1b4db288aa9042c607c29d/5f1b4db288aa9042c607c29c/latest_build)
 
 Aim of the app is to inform people about the current situation.
 

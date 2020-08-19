@@ -6,21 +6,20 @@ class VirusData {
   NetworkHelper networkOverallCases = NetworkHelper(url: totalsUrl);
 
   /// Returns overall cases.
-  Future<dynamic> getOverallCases() async {
+  Future<dynamic> getAllCases() async {
     var overallCasesData = await networkOverallCases.getData();
     return overallCasesData;
   }
 
   /// Returns cases using [country] name.
-  Future<dynamic> getCasesByCountryName(String country) async {
+  Future<dynamic> getCases(String country) async {
     var networkByCountry = NetworkHelper(url: countryUrl + country);
     var casesByCountryName = await networkByCountry.getData();
     return casesByCountryName;
   }
 
   /// Returns [country] report on specific [date].
-  Future<String> dailyReportByCountryCode(String country, String date) async {
-    //2020-04-01
+  Future<String> dateReport(String country, String date) async {
     var dailyReportUrl =
         'https://covid-193.p.rapidapi.com/history?day=$date&country=$country';
     var networkByCountryCode = NetworkHelper(url: dailyReportUrl);

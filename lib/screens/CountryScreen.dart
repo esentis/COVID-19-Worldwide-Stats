@@ -38,7 +38,7 @@ class _CountryScreenState extends State<CountryScreen> {
 
   //Method that updates the searched country UI
   Future<void> updateUI(String name) async {
-    var searchedCountryResults = await virusData.getCasesByCountryName(name);
+    var searchedCountryResults = await virusData.getCases(name);
     print(searchedCountryResults);
     try {
       resultsList[0] = jsonDecode(searchedCountryResults)['response'][0]
@@ -64,14 +64,14 @@ class _CountryScreenState extends State<CountryScreen> {
     }
   }
 
+  /// Updates the UI by calling the HTTP method [VirusData.dateReport].
   Future<void> getCountryReport() async {
     setState(() {
       showSpinner = true;
     });
     //YYYY-MM-DD
     for (var i = 0; i < dates.length; i++) {
-      var response =
-          await virusData.dailyReportByCountryCode(countryName, dates[i]);
+      var response = await virusData.dateReport(countryName, dates[i]);
       try {
         casesByDate[i] =
             jsonDecode(response)['response'][0]['cases']['total'].toDouble();

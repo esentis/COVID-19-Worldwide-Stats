@@ -17,24 +17,20 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  //A new instance of VirusData to access search methods
   VirusData virusData = VirusData();
 
-  //This is called exactly when the screen loads
   @override
   void initState() {
     super.initState();
-    //Fetch Overall Data every time page loads
     fetchData();
   }
 
-  //The method that gets initialized on page load, gets overall cases
+  /// Method that fetches and updates data.
   void fetchData() async {
-    kFetchedOverallCases = await virusData.getOverallCases();
+    kFetchedOverallCases = await virusData.getAllCases();
     print(kFetchedOverallCases);
     print(jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total']
         .toString());
-    //Set state of overall cases card
     setState(() {
       kOverallCases = jsonDecode(kFetchedOverallCases)['response'][0]['cases']
               ['total']
@@ -75,7 +71,6 @@ class _MainScreenState extends State<MainScreen> {
   var selectedLanguage = kSelectedLanguage.greek;
   //----------------------------------------------------------------//
 
-  //Main build method of cases screen
   @override
   Widget build(BuildContext context) {
     return Container(

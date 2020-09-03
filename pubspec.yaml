@@ -35,7 +35,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   animate_do: ^1.7.2
   modal_progress_hud: ^0.1.3
-  country_list_pick: ^1.0.0+2
+  country_list_pick: ^1.0.0+5
   google_fonts: ^1.1.0
   get: ^3.4.0
   fl_chart: ^0.11.0

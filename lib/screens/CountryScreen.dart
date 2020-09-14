@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
+import '../constants.dart';
 import '../virus_data.dart';
 
 class CountryScreen extends StatefulWidget {
@@ -19,17 +20,7 @@ String countryCode = '';
 String countryName = '';
 List<String> resultsList = ['', '', '', '', '', '', ''];
 List arguments = ['', '', ''];
-List dates = [
-  '2020-04-01',
-  '2020-04-15',
-  '2020-05-01',
-  '2020-05-15',
-  '2020-06-01',
-  '2020-06-15',
-  '2020-07-01',
-  '2020-07-15',
-  '2020-08-01',
-];
+
 List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 bool seperator = false;
 
@@ -70,8 +61,8 @@ class _CountryScreenState extends State<CountryScreen> {
       showSpinner = true;
     });
     //YYYY-MM-DD
-    for (var i = 0; i < dates.length; i++) {
-      var response = await virusData.dateReport(countryName, dates[i]);
+    for (var i = 0; i < kDates.length; i++) {
+      var response = await virusData.dateReport(countryName, kDates[i]);
       try {
         casesByDate[i] =
             jsonDecode(response)['response'][0]['cases']['total'].toDouble();
@@ -236,11 +227,11 @@ class _CountryScreenState extends State<CountryScreen> {
                           getTitles: (value) {
                             switch (value.toInt()) {
                               case 2:
-                                return dates[2].toString().substring(5, 10);
+                                return kDates[2].toString().substring(5, 10);
                               case 5:
-                                return dates[5].toString().substring(5, 10);
+                                return kDates[5].toString().substring(5, 10);
                               case 8:
-                                return dates[8].toString().substring(5, 10);
+                                return kDates[8].toString().substring(5, 10);
                             }
                             return '';
                           },

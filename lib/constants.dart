@@ -17,7 +17,17 @@ String kFetchedOverallDeaths;
 String kFetchedCasesByCountry;
 String kFetchedCasesByCountryGR;
 String kFetchedCasesByCountryCode;
-
+List kDates = [
+  '2020-04-01',
+  '2020-04-15',
+  '2020-05-01',
+  '2020-05-15',
+  '2020-06-01',
+  '2020-06-15',
+  '2020-07-01',
+  '2020-07-15',
+  '2020-08-01',
+];
 enum kSelectedLanguage { greek, english }
 
 const kResultsNumberStyle =
@@ -26,7 +36,8 @@ const kResultsTextStyle = TextStyle(fontSize: 24, fontFamily: 'Cardo');
 const kOverallTextStyle =
     TextStyle(fontSize: 30, fontFamily: 'Cardo', color: Colors.white);
 //THE API URLS THAT OUR APP CALLS
-const String totalsUrl = 'https://covid-193.p.rapidapi.com/statistics?country=All';
+const String totalsUrl =
+    'https://covid-193.p.rapidapi.com/statistics?country=All';
 const String countryUrl =
     'https://covid-193.p.rapidapi.com/statistics?country=';
 const String countryByCodeUrl =

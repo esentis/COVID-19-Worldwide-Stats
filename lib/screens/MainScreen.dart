@@ -1,3 +1,7 @@
+import 'package:covid19worldwide/components/country_searcher.dart';
+import 'package:covid19worldwide/components/language_picker.dart';
+import 'package:covid19worldwide/components/main_screen_cases.dart';
+import 'package:covid19worldwide/components/update_date.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -7,7 +11,6 @@ import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'dart:convert';
-import '../components/components.dart';
 
 String gCountryCode = '';
 

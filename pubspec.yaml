@@ -41,6 +41,7 @@ dependencies:
   fl_chart: ^0.11.0
   flutter_launcher_icons: ^0.7.5
   pedantic: ^1.8.0
+  adobe_xd: ^1.0.0+1
   # To add assets to your application, add an assets section, like this:
 
 dev_dependencies:

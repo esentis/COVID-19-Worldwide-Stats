@@ -46,6 +46,7 @@ class _CountryScreenState extends State<CountryScreen> {
     return response;
   }
 
+// TODO: FIX THE DATE CHART REPORTS
   /// Updates the UI by calling the HTTP method [VirusData.dateReport].
   Future getCountryReport() async {
     //YYYY-MM-DD

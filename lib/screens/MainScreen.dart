@@ -10,7 +10,6 @@ import '../constants.dart';
 import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:animate_do/animate_do.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
-import 'dart:convert';
 
 String gCountryCode = '';
 
@@ -20,8 +19,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  VirusData virusData = VirusData();
-
   @override
   void initState() {
     super.initState();
@@ -30,33 +27,18 @@ class _MainScreenState extends State<MainScreen> {
 
   /// Method that fetches and updates data.
   void fetchData() async {
-    kFetchedOverallCases = await virusData.getAllCases();
-    print(kFetchedOverallCases);
-    print(jsonDecode(kFetchedOverallCases)['response'][0]['cases']['total']
-        .toString());
+    var response = await getAllCases();
     setState(() {
-      kOverallCases = jsonDecode(kFetchedOverallCases)['response'][0]['cases']
-              ['total']
-          .toString();
-      kUpdateDate =
-          jsonDecode(kFetchedOverallCases)['response'][0]['day'].toString();
-      kUpdateTime =
-          jsonDecode(kFetchedOverallCases)['response'][0]['time'].toString();
-      kOverallNewCases = jsonDecode(kFetchedOverallCases)['response'][0]
-              ['cases']['new']
-          .toString();
-      kOverallNewDeaths = jsonDecode(kFetchedOverallCases)['response'][0]
-              ['deaths']['new']
-          .toString();
-      kOverallDeaths = jsonDecode(kFetchedOverallCases)['response'][0]['deaths']
-              ['total']
-          .toString();
-      kOverallRecovered = jsonDecode(kFetchedOverallCases)['response'][0]
-              ['cases']['recovered']
-          .toString();
-      kOverallCritical = jsonDecode(kFetchedOverallCases)['response'][0]
-              ['cases']['critical']
-          .toString();
+      kOverallCases = response['response'][0]['cases']['total'].toString();
+      kUpdateDate = response['response'][0]['day'].toString();
+      kUpdateTime = response['response'][0]['time'].toString();
+      kOverallNewCases = response['response'][0]['cases']['new'].toString();
+      kOverallNewDeaths = response['response'][0]['deaths']['new'].toString();
+      kOverallDeaths = response['response'][0]['deaths']['total'].toString();
+      kOverallRecovered =
+          response['response'][0]['cases']['recovered'].toString();
+      kOverallCritical =
+          response['response'][0]['cases']['critical'].toString();
     });
   }
 

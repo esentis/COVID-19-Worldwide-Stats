@@ -193,7 +193,7 @@ class _CountryScreenState extends State<CountryScreen> {
                             bottom: 0,
                             child: CircularResult(
                               color: const Color(0xff81b214),
-                              titleFontSize: 22,
+                              titleFontSize: 21,
                               contentFontSize: 22,
                               width: 100,
                               height: 100,
@@ -232,7 +232,7 @@ class _CountryScreenState extends State<CountryScreen> {
                             bottom: 30,
                             child: Flash(
                               child: CircularResult(
-                                titleFontSize: 25,
+                                titleFontSize: 22,
                                 contentFontSize: 25,
                                 color: const Color(0xffe00543),
                                 width: 120,

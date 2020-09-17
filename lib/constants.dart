@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:logger/logger.dart';
 
+var logger = Logger();
 //LIST OF CONSTANTS USED ACROSS THE APP
 String kOverallCases = '';
 String kOverallDeaths = '';

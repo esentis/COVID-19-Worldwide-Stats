@@ -23,43 +23,46 @@ class CircularResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: width,
-        height: height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(120),
-          color: color,
-          border: Border.all(width: 3.0, color: Colors.white),
-          boxShadow: [
-            const BoxShadow(
-              color: Colors.black,
-              offset: Offset(0, 5),
-              blurRadius: 12,
-            ),
-          ],
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Flexible(
-              child: Text(
-                title,
-                style: GoogleFonts.gfsNeohellenic(
-                  fontSize: titleFontSize,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(120),
+        color: color,
+        border: Border.all(width: 3.0, color: Colors.white),
+        boxShadow: [
+          const BoxShadow(
+            color: Colors.black,
+            offset: Offset(0, 5),
+            blurRadius: 12,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Flexible(
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.gfsNeohellenic(
+                fontSize: titleFontSize,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Flexible(
-              child: Text(
-                content,
-                style: GoogleFonts.gfsNeohellenic(
-                  fontSize: contentFontSize,
-                  color: Colors.white,
-                ),
+          ),
+          Flexible(
+            child: Text(
+              content,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.gfsNeohellenic(
+                fontSize: contentFontSize,
+                color: Colors.white,
               ),
             ),
-          ],
-        ));
+          ),
+        ],
+      ),
+    );
   }
 }

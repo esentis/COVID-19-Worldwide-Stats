@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:animate_do/animate_do.dart';
 import 'package:covid19worldwide/components/circular_result.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -22,8 +20,9 @@ List<String> resultsList = ['', '', '', '', '', '', ''];
 List arguments = ['', '', ''];
 Future<dynamic> countryStats;
 Future<dynamic> countryReport;
-List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+List<double> casesByDate = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 bool seperator = false;
+bool statsLoaded = false;
 
 class _CountryScreenState extends State<CountryScreen> {
   //Method that updates the searched country UI
@@ -46,29 +45,29 @@ class _CountryScreenState extends State<CountryScreen> {
     return response;
   }
 
-// TODO: FIX THE DATE CHART REPORTS
   /// Updates the UI by calling the HTTP method [VirusData.dateReport].
   Future getCountryReport() async {
     //YYYY-MM-DD
     for (var i = 0; i < kDates.length; i++) {
+      logger.wtf('This is the $i call');
       var response = await dateReport(countryName, kDates[i]);
-      countryReport = response;
       try {
-        casesByDate[i] =
-            jsonDecode(response)['response'][0]['cases']['total'].toDouble();
+        casesByDate[i] = response['response'][0]['cases']['total'].toDouble();
         logger.i(casesByDate, 'getCountryReport');
       } catch (e) {
-        logger.e(e.toString(), 'getCountryReport Error');
         casesByDate[i] = 0;
       }
     }
-    setState(() {});
+    setState(() {
+      statsLoaded = true;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     arguments = Get.arguments;
+    getCountryReport();
     countryCode = arguments[0];
     countryName = arguments[2];
   }
@@ -103,10 +102,36 @@ class _CountryScreenState extends State<CountryScreen> {
                       children: [
                         Column(
                           children: [
-                            Text(
-                              arguments[2],
-                              style: GoogleFonts.gfsNeohellenic(
-                                  fontSize: 35, color: Colors.white),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Flexible(
+                                  child: IconButton(
+                                      icon: const Icon(
+                                        Icons.arrow_back,
+                                        size: 40,
+                                      ),
+                                      onPressed: () {
+                                        statsLoaded = false;
+                                        Get.back(canPop: true);
+                                      }),
+                                ),
+                                Flexible(
+                                  child: Text(
+                                    arguments[2],
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.gfsNeohellenic(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                                const Flexible(
+                                  child: SizedBox(
+                                    width: 45,
+                                  ),
+                                ),
+                              ],
                             ),
                             const SizedBox(
                               height: 13,
@@ -126,7 +151,7 @@ class _CountryScreenState extends State<CountryScreen> {
                           ],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         Stack(
                           alignment: Alignment.center,
@@ -228,14 +253,9 @@ class _CountryScreenState extends State<CountryScreen> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 50),
-                        FutureBuilder(
-                          future: countryStats,
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) {
-                              return const CircularProgressIndicator();
-                            } else {
-                              return LineChart(
+                        const SizedBox(height: 10),
+                        statsLoaded
+                            ? LineChart(
                                 LineChartData(
                                   gridData: FlGridData(
                                     show: true,
@@ -257,23 +277,23 @@ class _CountryScreenState extends State<CountryScreen> {
                                     show: true,
                                     bottomTitles: SideTitles(
                                       showTitles: true,
-                                      reservedSize: 22,
+                                      reservedSize: 5,
                                       textStyle: const TextStyle(
                                           color: Color(0xff68737d),
                                           fontWeight: FontWeight.bold,
-                                          fontSize: 16),
+                                          fontSize: 17),
                                       getTitles: (value) {
                                         switch (value.toInt()) {
                                           case 2:
-                                            return kDates[2]
+                                            return kDates[4]
                                                 .toString()
                                                 .substring(5, 10);
                                           case 5:
-                                            return kDates[5]
+                                            return kDates[6]
                                                 .toString()
                                                 .substring(5, 10);
                                           case 8:
-                                            return kDates[8]
+                                            return kDates[9]
                                                 .toString()
                                                 .substring(5, 10);
                                         }
@@ -282,23 +302,9 @@ class _CountryScreenState extends State<CountryScreen> {
                                       margin: 10,
                                     ),
                                     leftTitles: SideTitles(
-                                      showTitles: true,
-                                      textStyle: const TextStyle(
-                                        color: Color(0xff67727d),
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
-                                      ),
-                                      getTitles: (value) {
-                                        var result = seperator
-                                            ? value.ceil().toString()
-                                            : '';
-                                        seperator
-                                            ? seperator = false
-                                            : seperator = true;
-                                        return result;
-                                      },
+                                      showTitles: false,
                                       reservedSize: 40,
-                                      margin: 12,
+                                      margin: 15,
                                     ),
                                   ),
                                   borderData: FlBorderData(
@@ -342,10 +348,8 @@ class _CountryScreenState extends State<CountryScreen> {
                                     ),
                                   ],
                                 ),
-                              );
-                            }
-                          },
-                        ),
+                              )
+                            : const CircularProgressIndicator(),
                       ],
                     ),
                   ),

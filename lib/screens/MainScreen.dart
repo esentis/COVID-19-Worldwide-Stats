@@ -144,9 +144,10 @@ class _MainScreenState extends State<MainScreen> {
                         newCases: kOverallNewCases,
                         newDeaths: kOverallNewDeaths,
                         overallCases: kOverallCases,
-                        casesText: selectedLanguage == kSelectedLanguage.english
-                            ? 'Worldwide cases'
-                            : 'Παγκόσμια κρούσματα',
+                        overallCasesText:
+                            selectedLanguage == kSelectedLanguage.english
+                                ? 'Worldwide cases'
+                                : 'Παγκόσμια κρούσματα',
                         newCasesText:
                             selectedLanguage == kSelectedLanguage.english
                                 ? 'New cases'

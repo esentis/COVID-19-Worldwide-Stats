@@ -29,6 +29,7 @@ List kDates = [
   '2020-07-01',
   '2020-07-15',
   '2020-08-01',
+  '2020-09-01',
 ];
 enum kSelectedLanguage { greek, english }
 

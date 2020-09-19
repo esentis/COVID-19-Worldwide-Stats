@@ -19,11 +19,15 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => MainScreen()),
+        GetPage(
+          name: '/',
+          page: () => MainScreen(),
+          transition: Transition.size,
+        ),
         GetPage(
             name: '/countryScreen',
             page: () => CountryScreen(),
-            transition: Transition.native),
+            transition: Transition.zoom),
       ],
       //Using the dark theme
       //Redirecting to the MainScreen.dart
